@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LetsEatCo/API.git"
+    "url": "git+https://github.com/LetsEatCo/Restaurants.git"
   },
   "bugs": {
-    "url": "https://github.com/LetsEatCo/API/issues"
+    "url": "https://github.com/LetsEatCo/Restaurants/issues"
   },
-  "homepage": "https://github.com/LetsEatCo/#readme",
+  "homepage": "https://github.com/LetsEatCo/Restaurants/#readme",
   "author": "Let's Eat <hello@letseat.co>",
   "license": "GPL-3.0",
   "dependencies": {
