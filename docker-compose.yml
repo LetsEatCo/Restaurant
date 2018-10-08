@@ -1,0 +1,15 @@
+version: '2'
+services:
+  app:
+    container_name: app
+    build: .
+    env_file:
+    - .env
+    command: yarn start:dev --hostname ${DEV_APP_HOST}  --port ${DEV_APP_PORT}
+    volumes:
+    - /letseat/restaurants/node_modules
+    restart: always
+    ports:
+    - "5050:5050"
+    tty: true
+    mem_limit: 300m
