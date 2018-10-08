@@ -1,0 +1,23 @@
+{
+  "name": "lets-eat-for-restaurants",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "nuxt build",
+    "start:dev": "NODE_ENV=developement nuxt",
+    "start": "NODE_ENV=production nuxt start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LetsEatCo/API.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LetsEatCo/API/issues"
+  },
+  "homepage": "https://github.com/LetsEatCo/#readme",
+  "author": "Let's Eat <hello@letseat.co>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "element-ui": "^2.4.8",
+    "nuxt": "latest"
+  }
+}
