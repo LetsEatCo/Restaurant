@@ -5,6 +5,12 @@ export default {
 	],
 	srcDir: 'src/',
 	plugins: [
-		'@/plugins/element-ui'
-	]
-}
+		'@/plugins/element-ui',
+		'@/plugins/local-storage'
+	],
+	modules: [
+		'@nuxtjs/axios',
+		'@nuxtjs/proxy'
+	],
+	mode: 'spa'
+};
