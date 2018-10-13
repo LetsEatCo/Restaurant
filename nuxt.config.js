@@ -1,7 +1,8 @@
 export default {
 	css: [
 		'element-ui/lib/theme-chalk/reset.css',
-		'element-ui/lib/theme-chalk/index.css'
+		'element-ui/lib/theme-chalk/index.css',
+		'modern-normalize'
 	],
 	srcDir: 'src/',
 	plugins: [
