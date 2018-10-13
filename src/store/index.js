@@ -12,11 +12,11 @@ const store = () => {
 			storeModule
 		},
 		actions: {
-			nuxtServerInit() {
-				if (process.browser) {
-					const store = JSON.parse(localStorage.getItem('storeStorage'));
-					if (!!store.authModule.jwt) {
-						this.$axios.setToken(store.authModule.jwt, 'Bearer');
+			async nuxtServerInit({commit},{req, app}) {
+				if (process.server) {
+					const cookies = app.$cookies.get('store');
+					if (!!cookies && !!cookies.authModule.jwt) {
+						app.$axios.setToken(cookies.authModule.jwt, 'Bearer');
 					}
 				}
 			}
