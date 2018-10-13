@@ -6,11 +6,15 @@ export default {
 	srcDir: 'src/',
 	plugins: [
 		'@/plugins/element-ui',
-		'@/plugins/local-storage'
+		'@/plugins/cookies-state'
 	],
 	modules: [
 		'@nuxtjs/axios',
-		'@nuxtjs/proxy'
+		'@nuxtjs/proxy',
+		'cookie-universal-nuxt'
 	],
-	mode: 'spa'
+	loading: {
+		color: '#2CC485',
+		height: '5px'
+	}
 };
