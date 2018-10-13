@@ -6,7 +6,7 @@
 
 <script>
 
-	import StoreProfile from '../../components/Dashboard/StoreProfile';
+	import StoreProfile from '../../../components/Dashboard/StoreProfile';
     export default {
         name: "profile",
 				components: {StoreProfile}
