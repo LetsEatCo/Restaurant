@@ -1,11 +1,9 @@
 import Vue from 'vue';
-import {AUTH_LOGOUT} from '../actions/auth.actions';
 import {
 	STORE_PROFILE_REQUEST,
 	STORE_PROFILE_REQUEST_ERROR,
-	STORE_PROFILE_REQUEST_SUCCESS,
-	STORE_CREATE_KIOSK
-} from '../actions/store.actions';
+	STORE_PROFILE_REQUEST_SUCCESS
+} from '../../actions/store/store.actions';
 
 const state = {
 	status: '',
@@ -28,23 +26,7 @@ const actions = {
 			})
 			.catch(err => {
 				commit(STORE_PROFILE_REQUEST_ERROR);
-				dispatch(AUTH_LOGOUT);
 			});
-	},
-	[STORE_CREATE_KIOSK]: function ({commit,state}, payload) {
-
-		commit(STORE_CREATE_KIOSK, payload);
-
-		const headers = {
-			headers: {
-				Authorization: "Bearer " + state.jwt,
-			}
-		};
-
-		this.$axios.$post('http://localhost/stores/me/kiosks', payload, headers)
-			.then(res => res)
-			.catch(err => err);
-
 	}
 };
 
@@ -56,18 +38,10 @@ const mutations = {
 	[STORE_PROFILE_REQUEST_SUCCESS]: (state, res) => {
 		state.status = 'success';
 		Vue.set(state, 'profile', res.data);
-	},
-	[AUTH_LOGOUT]: state => {
-		state.profile = {};
-	},
-	[STORE_CREATE_KIOSK]: (state, payload) => {
-
-		// console.log(payload + ' jwt ' + state.jwt);
-
 	}
 };
 
-export default {
+export const storeModule = {
 	state,
 	getters,
 	actions,

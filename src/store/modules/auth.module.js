@@ -1,6 +1,6 @@
 import {AUTH_ERROR, AUTH_LOGOUT, AUTH_REQUEST, AUTH_SUCCESS} from '../actions/auth.actions';
-import {STORE_PROFILE_REQUEST} from '../actions/store.actions';
 import * as Cookies from 'js-cookie';
+import {STORE_PROFILE_REQUEST} from '../actions/store/store.actions';
 
 const state = {
 	status: ''

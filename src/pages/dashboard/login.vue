@@ -27,7 +27,6 @@
 
 <script>
 	import LoginForm from '../../components/Dashboard/LoginForm';
-	import {mapGetters} from 'vuex';
 
 	export default {
 		components: {LoginForm},

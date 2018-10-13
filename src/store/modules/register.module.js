@@ -1,7 +1,5 @@
 import {REGISTER_REQUEST, REGISTER_REQUEST_ERROR, REGISTER_REQUEST_SUCCESS} from '../actions/register.actions';
-import {AUTH_SUCCESS} from '../actions/auth.actions';
-import {STORE_PROFILE_REQUEST} from '../actions/store.actions';
-import * as Cookies from 'js-cookie';
+import {STORE_PROFILE_REQUEST} from '../actions/store/store.actions';
 
 const state = {
 	status: ''

@@ -27,8 +27,8 @@
 
 </style>
 <script>
+	import {STORE_CREATE_KIOSK_REQUEST} from '../../store/actions/store/store.kiosks.actions';
 
-	import {STORE_CREATE_KIOSK} from '../../store/actions/store.actions';
 	export default {
 		name: 'AddKioskForm',
 		data() {
@@ -40,10 +40,10 @@
 		},
 		methods: {
 			createKiosk() {
-				const payload = {
+				const data = {
 					serialNumber: this.form.serialNumber
 				};
-				return this.$store.dispatch(STORE_CREATE_KIOSK, payload);
+				return this.$store.dispatch(STORE_CREATE_KIOSK_REQUEST, data);
 			}
 		}
 	}
