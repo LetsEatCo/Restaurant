@@ -11,7 +11,7 @@
 	import AddKioskForm from '../../../../components/Dashboard/AddKioskForm';
 	export default {
 		components: {AddKioskForm},
-		// middleware: 'login-redirect',
+		middleware: 'is-logged',
 	}
 </script>
 

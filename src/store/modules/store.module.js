@@ -31,14 +31,20 @@ const actions = {
 				dispatch(AUTH_LOGOUT);
 			});
 	},
-	[STORE_CREATE_KIOSK]: function ({commit}, payload) {
+	[STORE_CREATE_KIOSK]: function ({commit,state}, payload) {
 
 		commit(STORE_CREATE_KIOSK, payload);
 
-		this.$axios.$post('http://localhost/stores/me/kiosks', payload)
-			.then(res => res)
-			.catch(err => console.log(err));
+		const headers = {
+			headers: {
+				Authorization: "Bearer " + state.jwt,
+			}
+		};
 
+		console.log('Authorization ' + headers.headers.Authorization);
+		this.$axios.$post('http://localhost/stores/me/kiosks', payload, headers)
+			.then(res => res)
+			.catch(err => err);
 
 	}
 };
@@ -57,7 +63,7 @@ const mutations = {
 	},
 	[STORE_CREATE_KIOSK]: (state, payload) => {
 
-		console.log(payload);
+		// console.log(payload + ' jwt ' + state.jwt);
 
 	}
 };
