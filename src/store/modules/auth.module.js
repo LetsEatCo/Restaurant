@@ -1,8 +1,9 @@
 import {AUTH_ERROR, AUTH_LOGOUT, AUTH_REQUEST, AUTH_SUCCESS} from '../actions/auth.actions';
 import {STORE_PROFILE_REQUEST} from '../actions/store.actions';
+import * as Cookies from 'js-cookie';
 
 const state = {
-	jwt: localStorage.getItem('JWT') || '',
+	jwt: process.browser ? Cookies.get('JWT') || '' : '',
 	status: ''
 };
 const getters = {
@@ -31,7 +32,7 @@ const actions = {
 	[AUTH_LOGOUT]: ({commit}) => {
 		return new Promise(resolve => {
 			commit(AUTH_LOGOUT);
-			localStorage.removeItem('storeStorage');
+			Cookies.remove('store');
 			resolve();
 		});
 	}

@@ -6,11 +6,11 @@ export default {
 	srcDir: 'src/',
 	plugins: [
 		'@/plugins/element-ui',
-		'@/plugins/local-storage'
+		'@/plugins/cookies-state'
 	],
 	modules: [
 		'@nuxtjs/axios',
-		'@nuxtjs/proxy'
-	],
-	mode: 'spa'
+		'@nuxtjs/proxy',
+		'cookie-universal-nuxt'
+	]
 };
