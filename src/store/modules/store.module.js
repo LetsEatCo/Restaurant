@@ -12,6 +12,7 @@ const state = {
 	profile: {}};
 
 const getters = {
+	isAuthenticated: state => !!state.jwt,
 	getProfile: state => state.profile,
 	isProfileLoaded: state => !!state.profile.name
 };

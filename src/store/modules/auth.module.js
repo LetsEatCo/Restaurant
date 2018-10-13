@@ -6,7 +6,6 @@ const state = {
 	status: ''
 };
 const getters = {
-	isAuthenticated: state => !!state.jwt,
 	authStatus: state => state.status
 };
 
