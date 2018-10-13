@@ -1,10 +1,9 @@
 import Vue from 'vue';
-import {AUTH_LOGOUT} from '../actions/auth.actions';
 import {
 	STORE_PROFILE_REQUEST,
 	STORE_PROFILE_REQUEST_ERROR,
 	STORE_PROFILE_REQUEST_SUCCESS
-} from '../actions/store.actions';
+} from '../../actions/store/store.actions';
 
 const state = {
 	status: '',
@@ -27,7 +26,6 @@ const actions = {
 			})
 			.catch(err => {
 				commit(STORE_PROFILE_REQUEST_ERROR);
-				dispatch(AUTH_LOGOUT);
 			});
 	}
 };
@@ -40,13 +38,10 @@ const mutations = {
 	[STORE_PROFILE_REQUEST_SUCCESS]: (state, res) => {
 		state.status = 'success';
 		Vue.set(state, 'profile', res.data);
-	},
-	[AUTH_LOGOUT]: state => {
-		state.profile = {};
 	}
 };
 
-export default {
+export const storeModule = {
 	state,
 	getters,
 	actions,

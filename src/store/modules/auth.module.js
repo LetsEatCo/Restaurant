@@ -1,6 +1,6 @@
 import {AUTH_ERROR, AUTH_LOGOUT, AUTH_REQUEST, AUTH_SUCCESS} from '../actions/auth.actions';
-import {STORE_PROFILE_REQUEST} from '../actions/store.actions';
 import * as Cookies from 'js-cookie';
+import {STORE_PROFILE_REQUEST} from '../actions/store/store.actions';
 
 const state = {
 	status: ''
@@ -17,7 +17,7 @@ const actions = {
 				.then(res => {
 					this.$axios.setToken(res.data.jwt, 'Bearer');
 					commit(AUTH_SUCCESS);
-					dispatch(STORE_PROFILE_REQUEST);
+					dispatch(STORE_PROFILE_REQUEST, res.data.jwt);
 					this.$router.push('/dashboard');
 					resolve(res);
 				})
