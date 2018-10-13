@@ -25,6 +25,7 @@ const actions = {
 			.then(res => {
 				commit(STORE_PROFILE_REQUEST_SUCCESS, res);
 				this.$router.push('/dashboard');
+				dispatch(STORE_PROFILE_REQUEST, res.data.jwt);
 			})
 			.catch(err => {
 				commit(STORE_PROFILE_REQUEST_ERROR);
