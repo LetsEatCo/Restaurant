@@ -3,7 +3,8 @@ import {AUTH_LOGOUT} from '../actions/auth.actions';
 import {
 	STORE_PROFILE_REQUEST,
 	STORE_PROFILE_REQUEST_ERROR,
-	STORE_PROFILE_REQUEST_SUCCESS
+	STORE_PROFILE_REQUEST_SUCCESS,
+	STORE_CREATE_KIOSK
 } from '../actions/store.actions';
 
 const state = {
@@ -29,6 +30,16 @@ const actions = {
 				commit(STORE_PROFILE_REQUEST_ERROR);
 				dispatch(AUTH_LOGOUT);
 			});
+	},
+	[STORE_CREATE_KIOSK]: function ({commit}, payload) {
+
+		commit(STORE_CREATE_KIOSK, payload);
+
+		this.$axios.$post('http://localhost/stores/me/kiosks', payload)
+			.then(res => res)
+			.catch(err => console.log(err));
+
+
 	}
 };
 
@@ -43,6 +54,11 @@ const mutations = {
 	},
 	[AUTH_LOGOUT]: state => {
 		state.profile = {};
+	},
+	[STORE_CREATE_KIOSK]: (state, payload) => {
+
+		console.log(payload);
+
 	}
 };
 

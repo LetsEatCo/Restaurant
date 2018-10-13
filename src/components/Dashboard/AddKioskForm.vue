@@ -28,6 +28,7 @@
 </style>
 <script>
 
+	import {STORE_CREATE_KIOSK} from '../../store/actions/store.actions';
 	export default {
 		name: 'AddKioskForm',
 		data() {
@@ -39,8 +40,10 @@
 		},
 		methods: {
 			createKiosk() {
-				const serialNumber = this.form.serialNumber;
-				console.log(serialNumber);
+				const payload = {
+					serialNumber: this.form.serialNumber
+				};
+				return this.$store.dispatch(STORE_CREATE_KIOSK, payload);
 			}
 		}
 	}
