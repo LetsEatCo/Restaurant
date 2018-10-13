@@ -10,6 +10,7 @@
 
 	import AddKioskForm from '../../../../components/Dashboard/AddKioskForm';
 	export default {
+		layout: 'Dashboard/DashboardLayout',
 		components: {AddKioskForm},
 	}
 </script>
