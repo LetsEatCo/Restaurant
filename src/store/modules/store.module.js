@@ -41,7 +41,6 @@ const actions = {
 			}
 		};
 
-		console.log('Authorization ' + headers.headers.Authorization);
 		this.$axios.$post('http://localhost/stores/me/kiosks', payload, headers)
 			.then(res => res)
 			.catch(err => err);
