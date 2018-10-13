@@ -10,7 +10,7 @@ export default function ({store}) {
 				removeItem: key => Cookies.remove(key)
 			},
 			paths: [
-				'authModule.jwt',
+				'storeModule.jwt',
 				'storeModule.profile'
 			]
 		})(store);

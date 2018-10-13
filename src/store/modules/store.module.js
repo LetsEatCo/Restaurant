@@ -6,7 +6,10 @@ import {
 	STORE_PROFILE_REQUEST_SUCCESS
 } from '../actions/store.actions';
 
-const state = {status: '', profile: {}};
+const state = {
+	status: '',
+	jwt: '',
+	profile: {}};
 
 const getters = {
 	getProfile: state => state.profile,
@@ -14,11 +17,12 @@ const getters = {
 };
 
 const actions = {
-	[STORE_PROFILE_REQUEST]: function ({commit, dispatch}) {
-		commit(STORE_PROFILE_REQUEST);
+	[STORE_PROFILE_REQUEST]: function ({commit, dispatch}, jwt) {
+		commit(STORE_PROFILE_REQUEST, jwt);
 		this.$axios.$get('http://localhost/stores/me')
 			.then(res => {
 				commit(STORE_PROFILE_REQUEST_SUCCESS, res);
+				this.$router.push('/dashboard');
 			})
 			.catch(err => {
 				commit(STORE_PROFILE_REQUEST_ERROR);
@@ -28,8 +32,9 @@ const actions = {
 };
 
 const mutations = {
-	[STORE_PROFILE_REQUEST]: state => {
+	[STORE_PROFILE_REQUEST]: (state, jwt) => {
 		state.status = 'loading';
+		Vue.set(state, 'jwt', jwt);
 	},
 	[STORE_PROFILE_REQUEST_SUCCESS]: (state, res) => {
 		state.status = 'success';
