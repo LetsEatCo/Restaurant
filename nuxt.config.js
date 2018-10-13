@@ -12,5 +12,9 @@ export default {
 		'@nuxtjs/axios',
 		'@nuxtjs/proxy',
 		'cookie-universal-nuxt'
-	]
+	],
+	loading: {
+		color: '#2CC485',
+		height: '5px'
+	}
 };

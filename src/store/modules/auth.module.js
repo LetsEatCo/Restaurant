@@ -3,11 +3,9 @@ import {STORE_PROFILE_REQUEST} from '../actions/store.actions';
 import * as Cookies from 'js-cookie';
 
 const state = {
-	jwt: process.browser ? Cookies.get('JWT') || '' : '',
 	status: ''
 };
 const getters = {
-	isAuthenticated: state => !!state.jwt,
 	authStatus: state => state.status
 };
 
@@ -18,7 +16,7 @@ const actions = {
 			this.$axios.$post('http://localhost/stores/login', credentials)
 				.then(res => {
 					this.$axios.setToken(res.data.jwt, 'Bearer');
-					commit(AUTH_SUCCESS, res);
+					commit(AUTH_SUCCESS);
 					dispatch(STORE_PROFILE_REQUEST);
 					this.$router.push('/dashboard');
 					resolve(res);
@@ -42,9 +40,8 @@ const mutations = {
 	[AUTH_REQUEST]: state => {
 		state.status = 'loading';
 	},
-	[AUTH_SUCCESS]: (state, res) => {
+	[AUTH_SUCCESS]: (state) => {
 		state.status = 'success';
-		state.jwt = res.data.jwt;
 	},
 	[AUTH_ERROR]: state => {
 		state.status = 'error';

@@ -1,6 +1,8 @@
 <template>
 	<el-container>
-		<el-main>HELLO WORLD</el-main>
+		<el-main>
+			<RegisterForm/>
+		</el-main>
 	</el-container>
 
 </template>
@@ -12,3 +14,9 @@
 		line-height: 60px;
 	}
 </style>
+<script>
+	import RegisterForm from '../components/Home/RegisterForm';
+	export default {
+		components: {RegisterForm}
+	};
+</script>
