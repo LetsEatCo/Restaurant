@@ -4,8 +4,7 @@
 
 
 		<el-form ref="form" :model="form" label-width="120px">
-
-			<el-form-item label="Activity name">
+			<el-form-item label="Serial Number :" prop="serialNumber">
 				<el-input v-model="form.serialNumber"></el-input>
 			</el-form-item>
 			<el-form-item>
