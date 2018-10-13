@@ -17,7 +17,7 @@ const actions = {
 				.then(res => {
 					this.$axios.setToken(res.data.jwt, 'Bearer');
 					commit(AUTH_SUCCESS);
-					dispatch(STORE_PROFILE_REQUEST);
+					dispatch(STORE_PROFILE_REQUEST, res.data.jwt);
 					this.$router.push('/dashboard');
 					resolve(res);
 				})
