@@ -2,8 +2,13 @@ import Vue from 'vue';
 import {
 	STORE_PROFILE_REQUEST,
 	STORE_PROFILE_REQUEST_ERROR,
-	STORE_PROFILE_REQUEST_SUCCESS
+	STORE_PROFILE_REQUEST_SUCCESS,
+	STORE_EDIT_PROFILE_REQUEST, STORE_EDIT_PROFILE_REQUEST_SUCCESS, STORE_EDIT_PROFILE_REQUEST_ERROR
 } from '../../actions/store/store.actions';
+import {
+	STORE_CREATE_KIOSK_REQUEST_ERROR,
+	STORE_CREATE_KIOSK_REQUEST_SUCCESS
+} from "../../actions/store/store.kiosks.actions";
 
 const state = {
 	status: '',
@@ -27,6 +32,20 @@ const actions = {
 			.catch(err => {
 				commit(STORE_PROFILE_REQUEST_ERROR);
 			});
+	},
+	[STORE_EDIT_PROFILE_REQUEST]: function({commit, dispatch}, data){
+
+		commit(STORE_EDIT_PROFILE_REQUEST);
+		const cookies = this.$cookies.get('store');
+		this.$axios.setToken(cookies.storeModule.jwt, 'Bearer');
+		this.$axios.$patch('http://localhost/stores/me', data)
+			.then(res => {
+				commit(STORE_EDIT_PROFILE_REQUEST_SUCCESS, res);
+			})
+			.catch(err => {
+				commit(STORE_EDIT_PROFILE_REQUEST_ERROR);
+			});
+
 	}
 };
 
@@ -38,6 +57,18 @@ const mutations = {
 	[STORE_PROFILE_REQUEST_SUCCESS]: (state, res) => {
 		state.status = 'success';
 		Vue.set(state, 'profile', res.data);
+	},
+	[STORE_EDIT_PROFILE_REQUEST]: state => {
+
+		state.status = 'loading';
+		Vue.set(state);
+	},
+	[STORE_EDIT_PROFILE_REQUEST_SUCCESS]: (state, res) => {
+		state.status = 'success';
+		Vue.set(state, res.data);
+	},
+	[STORE_EDIT_PROFILE_REQUEST_ERROR]: state => {
+		state.status = 'error';
 	}
 };
 
