@@ -1,16 +1,18 @@
 <template>
-    <div>
+	<div>
 		<StoreProfile/>
-		</div>
+	</div>
 </template>
 
 <script>
 
 	import StoreProfile from '../../../components/Dashboard/StoreProfile';
-    export default {
-        name: "profile",
-				components: {StoreProfile}
-    }
+
+	export default {
+		name: 'profile',
+		layout: 'Dashboard/DashboardLayout',
+		components: {StoreProfile}
+	};
 </script>
 
 <style scoped>

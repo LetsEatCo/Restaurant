@@ -1,13 +1,14 @@
 <template>
 	<div class="app-wrapper">
 		<Sidebar class="sidebar-container"/>
-		<div class="main-container">
-			<no-ssr>
-				<nuxt/>
-			</no-ssr>
-		</div>
+		<el-container>
+			<el-col :span="24" class="main-container">
+				<no-ssr>
+					<nuxt/>
+				</no-ssr>
+			</el-col>
+		</el-container>
 	</div>
-
 </template>
 
 <script>
