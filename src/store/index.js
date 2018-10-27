@@ -1,18 +1,21 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import authModule from './modules/auth.module';
-import registerModule from './modules/register.module';
-import {storeModule, storeKioksModule} from './modules/store';
+import {default as Auth} from './modules/auth.module';
+import {default as Register} from './modules/register.module';
+import {storeModule as Store,
+	storeKiosksModule as StoreKiosks,
+	storeIngredientsModule as StoreIngredients} from './modules/store';
 
 Vue.use(Vuex);
 
 const store = () => {
 	return new Vuex.Store({
 		modules: {
-			authModule,
-			registerModule,
-			storeModule,
-			storeKioksModule
+			Auth,
+			Register,
+			Store,
+			StoreKiosks,
+			StoreIngredients
 		},
 	});
 };

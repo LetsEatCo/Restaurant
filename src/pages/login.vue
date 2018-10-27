@@ -20,6 +20,7 @@
 	.el-container {
 		height: 100vh;
 		width: 100vw;
+		padding: 0;
 	}
 
 	.el-col {
@@ -41,7 +42,7 @@
 		&__overlay {
 			height: 100%;
 			width: 100%;
-			background-color: rgba(0, 0, 0, 0.5);
+			background-color: rgba(0, 0, 0, 0.8);
 		}
 		&__logo {
 			display: flex;

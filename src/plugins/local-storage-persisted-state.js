@@ -10,14 +10,15 @@ export default function ({store}) {
 				removeItem: key => Cookies.remove(key)
 			},
 			paths: [
-				'storeModule.jwt',
+				'Store.jwt',
 			]
 		})(store);
 	createPersistedState({
 		key: 'root:persist',
 		paths: [
-			'storeModule.jwt',
-			'storeModule.profile'
+			'Store.jwt',
+			'Store.profile',
+			'StoreIngredients.ingredients',
 		]
 	})(store);
 }

@@ -1,7 +1,10 @@
 export default function ({store, redirect, route, app}) {
-	const cookies = app.$cookies.get('rootpersist');
 	if (process.server && route.name) {
-		if (route.name === 'dashboard-login' && cookies && cookies.storeModule.jwt) {
+		const cookies = app.$cookies.get('rootpersist');
+		if (cookies) {
+			app.$axios.setToken(cookies.Store.jwt, 'Bearer');
+		}
+		if (route.name === 'dashboard-login' && cookies && cookies.Store.jwt) {
 			return redirect('/dashboard');
 		}
 		if (route.name.includes('dashboard') && !cookies) {
