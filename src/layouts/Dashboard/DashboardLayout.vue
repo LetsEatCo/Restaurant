@@ -38,4 +38,10 @@
 		position: absolute;
 		z-index: 999;
 	}
+
+	.el-container {
+		padding: 0 3%;
+		height: 100vh;
+		overflow: scroll;
+	}
 </style>

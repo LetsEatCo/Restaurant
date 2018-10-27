@@ -61,7 +61,7 @@ const mutations = {
 	}
 };
 
-export const storeKioksModule = {
+export const storeKiosksModule = {
 	state,
 	getters,
 	actions,

@@ -1,6 +1,6 @@
 <template>
 	<div v-if="!item.children">
-		<nuxt-link v-if="item.url" :to="'/dashboard'+item.url" append>
+		<nuxt-link v-if="item.url && !item.children" :to="'/dashboard'+item.url" append class="Sidebar-Item__link">
 			<el-menu-item :index="item.index">
 				<span slot="title">{{item.name}}</span>
 			</el-menu-item>
@@ -29,3 +29,17 @@
 		}
 	};
 </script>
+
+<style lang="scss" scoped>
+	a {
+		text-decoration: none;
+	}
+	.el-menu-item.is-active {
+		color: #000;
+		background-color: #dcdcdc;
+	}
+
+	.el-menu-item:hover, .el-submenu__title:hover {
+		background-color: #dcdcdc;
+	}
+</style>
