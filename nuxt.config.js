@@ -11,7 +11,8 @@ export default {
 	srcDir: 'src/',
 	plugins: [
 		'@/plugins/element-ui',
-		'@/plugins/cookies-state'
+		'@/plugins/cookies-state',
+		{src: '@/plugins/mq', ssr: false}
 	],
 	modules: [
 		'@nuxtjs/axios',

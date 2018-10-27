@@ -1,5 +1,5 @@
 <template>
-	<el-form ref="form" :model="form">
+	<el-form ref="form" :model="form" :class="$mq">
 		<el-form-item class="email-field">
 			<el-input placeholder="Email" type="email" v-model="form.email" autocomplete="on"></el-input>
 		</el-form-item>
@@ -17,6 +17,13 @@
 		flex-direction: column;
 		justify-content: center;
 		padding: 0 120px;
+
+		&.md {
+			padding: 0 40px;
+		}
+		&.sm {
+			padding: 0 20px;
+		}
 	}
 
 	.el-input {
@@ -27,7 +34,7 @@
 	}
 
 	.el-button {
-		width: 360px;
+		max-width: 360px;
 		text-align: left;
 		text-transform: uppercase;
 		background-color: black;

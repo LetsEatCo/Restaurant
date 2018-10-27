@@ -2,14 +2,14 @@
 	<el-container>
 		<el-main>
 			<el-row>
-				<el-col :span="10" class="Login-Form">
+				<el-col :span="this.responsiveLoginCol" class="Login-Form">
 					<LoginForm/>
 				</el-col>
-				<el-col :span="14" class="Login-Media">
-					<div class="Login-Media__logo">
+				<el-col :span="this.responsiveMediaCol" class="Login-Media">
+					<mq-layout class="Login-Media__logo" mq='md+'>
 						<img src="https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Logo--White.svg">
 						<p>For Restaurants</p>
-					</div>
+					</mq-layout>
 					<div class="Login-Media__overlay"></div>
 				</el-col>
 			</el-row>
@@ -51,12 +51,12 @@
 			top: 50%;
 			transform: translateY(-50%);
 			img {
-				width: 240px;
+				width: 180px;
 				border-bottom: 1px solid white;
 			}
 			p {
 				color: white;
-				font-size: 28px;
+				font-size: 24px;
 				letter-spacing: 2.5px;
 				margin: 30px 0 0 0;
 			}
@@ -69,6 +69,14 @@
 
 	export default {
 		components: {LoginForm},
-		middleware: 'login-redirect'
+		middleware: 'login-redirect',
+		computed: {
+			responsiveMediaCol() {
+				return this.$mq === 'sm' ? 6 : 14
+			},
+			responsiveLoginCol() {
+				return this.$mq === 'sm' ? 18 : 10
+			}
+		},
 	};
 </script>

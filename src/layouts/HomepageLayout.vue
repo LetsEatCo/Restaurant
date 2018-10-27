@@ -98,6 +98,7 @@
 
 	.el-footer {
 		background-color: black;
+		padding: 0 60px;
 		.Footer {
 			margin: auto;
 			max-width: 1024px;

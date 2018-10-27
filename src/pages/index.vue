@@ -1,9 +1,9 @@
 <template>
 	<div class="Home">
 		<div class="Hero__Content">
-			<h1 class="Hero__Content__title">The fast way to <br/>
+			<h1 class="Hero__Content__title" :class="$mq">The fast way to <br/>
 				get food to your customers</h1>
-			<div class="Hero__Content__form">
+			<div class="Hero__Content__form" :class="$mq">
 				<RegisterForm/>
 			</div>
 		</div>
@@ -38,6 +38,9 @@
 			font-size: 52px;
 			line-height: 1;
 			margin: 0;
+			&.md {
+				max-width: 640px;
+			}
 		}
 
 		&__form {
@@ -48,6 +51,10 @@
 			right: 0;
 			top: 60px;
 			border-top: 10px solid #999999;
+			&.md, &.sm {
+				margin-top: 40px;
+				top: auto;
+			}
 		}
 	}
 
