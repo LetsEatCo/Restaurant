@@ -1,10 +1,10 @@
 <template>
-	<el-form ref="form" :model="form" label-width="120px">
-		<el-form-item label="Email" class="email-field">
-			<el-input type="email" v-model="form.email" autocomplete="on"></el-input>
+	<el-form ref="form" :model="form">
+		<el-form-item class="email-field">
+			<el-input placeholder="Email" type="email" v-model="form.email" autocomplete="on"></el-input>
 		</el-form-item>
-		<el-form-item label="Password" class="password-field">
-			<el-input type="password" v-model="form.password" autocomplete="off"></el-input>
+		<el-form-item class="password-field">
+			<el-input placeholder="Password" type="password" v-model="form.password" autocomplete="off"></el-input>
 		</el-form-item>
 		<el-button @click="login">Login</el-button>
 	</el-form>
@@ -21,16 +21,22 @@
 
 	.el-input {
 		max-width: 360px;
+		/deep/ .el-input__inner {
+			border-radius: 0;
+		}
 	}
 
 	.el-button {
-		margin-left: 120px;
 		width: 360px;
+		text-align: left;
+		text-transform: uppercase;
+		background-color: black;
+		color: white;
+		border: none;
+		border-radius: 0;
+		padding: 16px 20px;
 	}
 
-	.password-field {
-		margin-bottom: 44px;
-	}
 </style>
 
 <script>

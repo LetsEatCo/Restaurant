@@ -1,6 +1,10 @@
 export default {
+	head: {
+		link: [
+			{ rel: 'stylesheet', href: 'https://s3.eu-west-3.amazonaws.com/lets-eat-co/fonts/fonts.css' }
+		]
+	},
 	css: [
-		'element-ui/lib/theme-chalk/reset.css',
 		'element-ui/lib/theme-chalk/index.css',
 		'modern-normalize'
 	],
