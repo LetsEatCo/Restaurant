@@ -27,6 +27,7 @@
     "js-cookie": "^2.2.0",
     "modern-normalize": "^0.5.0",
     "nuxt": "latest",
+    "vue-mq": "^0.2.1",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
