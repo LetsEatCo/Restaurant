@@ -1,5 +1,6 @@
 import {AUTH_ERROR, AUTH_LOGOUT, AUTH_REQUEST, AUTH_SUCCESS} from '../actions/auth.actions';
 import {STORE_PROFILE_REQUEST} from '../actions/store/store.actions';
+import * as Cookies from 'js-cookie';
 
 const state = {
 	status: ''
@@ -29,6 +30,7 @@ const actions = {
 	[AUTH_LOGOUT]: ({commit}) => {
 		return new Promise(resolve => {
 			commit(AUTH_LOGOUT);
+			Cookies.remove('rootpersist');
 			resolve();
 		});
 	}

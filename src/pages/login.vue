@@ -65,7 +65,7 @@
 </style>
 
 <script>
-	import LoginForm from '../../components/Dashboard/LoginForm';
+	import LoginForm from '../components/Dashboard/LoginForm';
 
 	export default {
 		components: {LoginForm},

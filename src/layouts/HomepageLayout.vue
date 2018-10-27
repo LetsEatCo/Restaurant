@@ -7,7 +7,7 @@
 							 src="https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Logo--Black--no-fork.svg">
 				</div>
 				<div class="Header__right">
-					<nuxt-link v-if="!isAuthenticated" to="/dashboard/login" class="Header__right__login">Login</nuxt-link>
+					<nuxt-link v-if="!isAuthenticated" to="/login" class="Header__right__login">Login</nuxt-link>
 					<nuxt-link v-if="isAuthenticated" to="/dashboard" class="Header__right__login">Dashboard</nuxt-link>
 				</div>
 			</div>
