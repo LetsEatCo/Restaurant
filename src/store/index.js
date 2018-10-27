@@ -14,16 +14,6 @@ const store = () => {
 			storeModule,
 			storeKioksModule
 		},
-		actions: {
-			async nuxtServerInit({commit},{req, app}) {
-				if (process.server) {
-					const cookies = app.$cookies.get('store');
-					if (cookies && cookies.storeModule.jwt) {
-						await app.$axios.setToken(cookies.storeModule.jwt, 'Bearer');
-					}
-				}
-			}
-		}
 	});
 };
 

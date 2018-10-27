@@ -1,5 +1,4 @@
 import {AUTH_ERROR, AUTH_LOGOUT, AUTH_REQUEST, AUTH_SUCCESS} from '../actions/auth.actions';
-import * as Cookies from 'js-cookie';
 import {STORE_PROFILE_REQUEST} from '../actions/store/store.actions';
 
 const state = {
@@ -30,7 +29,6 @@ const actions = {
 	[AUTH_LOGOUT]: ({commit}) => {
 		return new Promise(resolve => {
 			commit(AUTH_LOGOUT);
-			Cookies.remove('store');
 			resolve();
 		});
 	}
@@ -48,6 +46,7 @@ const mutations = {
 	},
 	[AUTH_LOGOUT]: state => {
 		state.jwt = '';
+		state.profile = '';
 	}
 };
 

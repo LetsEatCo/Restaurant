@@ -69,7 +69,6 @@
 
 	export default {
 		components: {LoginForm},
-		middleware: 'login-redirect',
 		computed: {
 			responsiveMediaCol() {
 				return this.$mq === 'sm' ? 6 : 14
@@ -78,5 +77,8 @@
 				return this.$mq === 'sm' ? 18 : 10
 			}
 		},
+		beforeMount(){
+
+		}
 	};
 </script>

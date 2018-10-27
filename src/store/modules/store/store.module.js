@@ -36,8 +36,7 @@ const actions = {
 	[STORE_EDIT_PROFILE_REQUEST]: function({commit, dispatch}, data){
 
 		commit(STORE_EDIT_PROFILE_REQUEST);
-		const cookies = this.$cookies.get('store');
-		this.$axios.setToken(cookies.storeModule.jwt, 'Bearer');
+		this.$axios.setToken(JSON.parse(localStorage.getItem('store:persist')).storeModule.jwt, 'Bearer');
 		this.$axios.$patch('http://localhost/stores/me', data)
 			.then(res => {
 				commit(STORE_EDIT_PROFILE_REQUEST_SUCCESS, res);

@@ -20,8 +20,7 @@ const getters = {
 const actions = {
 	[STORE_CREATE_KIOSK_REQUEST]: function ({commit, dispatch}, data) {
 		commit(STORE_CREATE_KIOSK_REQUEST);
-		const cookies = this.$cookies.get('store');
-		this.$axios.setToken(cookies.storeModule.jwt, 'Bearer');
+		this.$axios.setToken(JSON.parse(localStorage.getItem('store:persist')).storeModule.jwt, 'Bearer');
 		this.$axios.$post('http://localhost/stores/me/kiosks', data)
 			.then(res => {
 				commit(STORE_CREATE_KIOSK_REQUEST_SUCCESS, res);
