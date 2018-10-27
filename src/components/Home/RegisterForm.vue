@@ -112,6 +112,9 @@
 
 	.el-input /deep/ .el-input__inner {
 		border-radius: 0;
+		&:focus {
+			border-color: black;
+		}
 	}
 
 	.el-button {

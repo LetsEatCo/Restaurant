@@ -10,7 +10,7 @@
 	</el-form>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.el-form {
 		height: 100%;
 		display: flex;
@@ -27,14 +27,15 @@
 	}
 
 	.el-input {
-		max-width: 360px;
 		/deep/ .el-input__inner {
 			border-radius: 0;
+			&:focus {
+				border-color: black;
+			}
 		}
 	}
 
 	.el-button {
-		max-width: 360px;
 		text-align: left;
 		text-transform: uppercase;
 		background-color: black;
@@ -42,6 +43,11 @@
 		border: none;
 		border-radius: 0;
 		padding: 16px 20px;
+		&:hover {
+			background-color: black;
+			color: white;
+			border: none;
+		}
 	}
 
 </style>
