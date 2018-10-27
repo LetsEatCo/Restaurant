@@ -37,7 +37,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: url("https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Restaurants/HeroImage-2.jpg") no-repeat 50% 50%;
+		background: url("https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Restaurants/HeroImage-2.jpg") no-repeat 75% 50%;
 		&__overlay {
 			height: 100%;
 			width: 100%;
