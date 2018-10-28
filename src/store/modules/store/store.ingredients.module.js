@@ -2,11 +2,16 @@ import Vue from 'vue';
 import {
 	STORE_CREATE_INGREDIENT_REQUEST,
 	STORE_CREATE_INGREDIENT_REQUEST_ERROR,
-	STORE_CREATE_INGREDIENT_REQUEST_SUCCESS, STORE_DELETE_INGREDIENT_REQUEST, STORE_DELETE_INGREDIENT_REQUEST_SUCCESS,
+	STORE_CREATE_INGREDIENT_REQUEST_SUCCESS,
+	STORE_DELETE_INGREDIENT_REQUEST,
+	STORE_DELETE_INGREDIENT_REQUEST_SUCCESS,
 	STORE_GET_INGREDIENTS_REQUEST,
 	STORE_DELETE_INGREDIENT_REQUEST_ERROR,
 	STORE_GET_INGREDIENTS_REQUEST_ERROR,
-	STORE_GET_INGREDIENTS_REQUEST_SUCCESS
+	STORE_GET_INGREDIENTS_REQUEST_SUCCESS,
+	STORE_UPDATE_INGREDIENT_REQUEST,
+	STORE_UPDATE_INGREDIENT_REQUEST_SUCCESS,
+	STORE_UPDATE_INGREDIENT_REQUEST_ERROR
 } from '../../actions/store/store.ingredients.actions';
 
 const state = {
@@ -67,15 +72,33 @@ const actions = {
 					reject(err);
 				});
 		});
+	},
 
+	[STORE_UPDATE_INGREDIENT_REQUEST]: function ({commit, dispatch}, data) {
+		const {uuid, ...values} = data;
+		commit(STORE_UPDATE_INGREDIENT_REQUEST);
+		return new Promise((resolve, reject) => {
+			this.$axios.setToken(this.$cookies.get('rootpersist').Store.jwt
+				|| this.app.store.getters.getToken, 'Bearer');
+			this.$axios.$patch(`http://localhost/stores/me/ingredients/${uuid}`, values)
+				.then(res => {
+					commit(STORE_UPDATE_INGREDIENT_REQUEST_SUCCESS);
+					dispatch(STORE_GET_INGREDIENTS_REQUEST);
+					resolve(res);
+				})
+				.catch(err => {
+					commit(STORE_UPDATE_INGREDIENT_REQUEST_ERROR);
+					reject(err);
+				});
+		});
 	}
 };
 
 const mutations = {
-	[STORE_CREATE_INGREDIENT_REQUEST]: (state, jwt) => {
+	[STORE_CREATE_INGREDIENT_REQUEST]: (state) => {
 		state.status = 'loading';
 	},
-	[STORE_CREATE_INGREDIENT_REQUEST_SUCCESS]: (state, res) => {
+	[STORE_CREATE_INGREDIENT_REQUEST_SUCCESS]: (state) => {
 		state.status = 'success';
 	},
 	[STORE_CREATE_INGREDIENT_REQUEST_ERROR]: state => {
@@ -98,6 +121,15 @@ const mutations = {
 		state.status = 'success';
 	},
 	[STORE_DELETE_INGREDIENT_REQUEST_ERROR]: (state) => {
+		state.status = 'error';
+	},
+	[STORE_UPDATE_INGREDIENT_REQUEST]: (state) => {
+		state.status = 'updating';
+	},
+	[STORE_UPDATE_INGREDIENT_REQUEST_SUCCESS]: (state) => {
+		state.status = 'success';
+	},
+	[STORE_UPDATE_INGREDIENT_REQUEST_ERROR]: (state) => {
 		state.status = 'error';
 	}
 };
