@@ -18,6 +18,7 @@ const state = {
 const getters = {
 	isAuthenticated: state => !!state.jwt,
 	getProfile: state => state.profile,
+	getToken: state => state.jwt,
 	isProfileLoaded: state => !!state.profile.name
 };
 
@@ -57,7 +58,6 @@ const mutations = {
 		Vue.set(state, 'profile', res.data);
 	},
 	[STORE_EDIT_PROFILE_REQUEST]: state => {
-
 		state.status = 'loading';
 		Vue.set(state);
 	},
