@@ -25,6 +25,7 @@
 			</el-dialog>
 		</div>
 		<el-table
+			class="Ingredients-table"
 			ref="multipleTable"
 			:data="this.getIngredients"
 			stripe
@@ -69,6 +70,10 @@
 			bottom: 0;
 			left: 50%;
 		}
+	}
+	
+	.Ingredients-table {
+		margin-bottom: 100px;
 	}
 
 	.el-header {
