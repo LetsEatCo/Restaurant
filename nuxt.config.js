@@ -11,6 +11,7 @@ export default {
 	srcDir: 'src/',
 	plugins: [
 		'@/plugins/element-ui',
+		'@/plugins/auth',
 		{src: '@/plugins/local-storage-persisted-state', ssr: false},
 		{src: '@/plugins/mq', ssr: false}
 	],
@@ -21,7 +22,7 @@ export default {
 	],
 	loading: {
 		color: '#2CC485',
-		height: '5px'
+		height: '4px'
 	},
 	router: {
 		middleware: ['login-redirect']
