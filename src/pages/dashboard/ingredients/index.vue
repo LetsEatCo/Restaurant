@@ -25,7 +25,7 @@
 			</el-dialog>
 		</div>
 		<el-table
-			class="Ingredients-table"
+			class="Table"
 			ref="multipleTable"
 			:data="this.getIngredients"
 			stripe
@@ -35,17 +35,25 @@
 				width="55">
 			</el-table-column>
 			<el-table-column
-				v-if="false"
-				property="uuid"
-				label="UUID">
-			</el-table-column>
-			<el-table-column
 				property="name"
 				label="Name">
 			</el-table-column>
 			<el-table-column
 				property="quantity"
 				label="Quantity">
+			</el-table-column>
+			<el-table-column
+				fixed="right"
+				label="Operations"
+				width="120">
+				<template slot-scope="scope">
+					<el-button
+						@click.native.prevent="deleteIngredient(scope.$index, getIngredients)"
+						class="Table__delete-button"
+						size="small">
+						Delete
+					</el-button>
+				</template>
 			</el-table-column>
 		</el-table>
 	</div>
@@ -71,7 +79,7 @@
 			left: 50%;
 		}
 	}
-	
+
 	.Ingredients-table {
 		margin-bottom: 100px;
 	}
@@ -115,6 +123,35 @@
 			border-radius: 0;
 			text-transform: uppercase;
 			font-size: 12px;
+		}
+	}
+
+	.Table {
+		/deep/ table {
+			/deep/ thead {
+				color: rgba(0, 0, 0, 0.8);
+			}
+
+			tbody {
+				/deep/ tr.hover-row > td {
+					background-color: rgba(0, 0, 0, 0.1);
+				}
+				tr {
+					color: rgba(0, 0, 0, 0.7);
+				}
+			}
+		}
+		&__delete-button {
+			border-radius: 0;
+			color: black;
+			background-color: white;
+			text-transform: uppercase;
+			font-size: 10px;
+			/deep/ &:hover {
+				color: black;
+				background-color: white;
+				border: 1px solid rgba(0, 0, 0, 0.5);
+			}
 		}
 	}
 </style>
@@ -192,7 +229,7 @@
 
 <script>
 	import {
-		STORE_CREATE_INGREDIENT_REQUEST,
+		STORE_CREATE_INGREDIENT_REQUEST, STORE_DELETE_INGREDIENT_REQUEST,
 		STORE_GET_INGREDIENTS_REQUEST,
 		STORE_GET_INGREDIENTS_REQUEST_SUCCESS
 	} from '../../../store/actions/store/store.ingredients.actions';
@@ -219,6 +256,9 @@
 					quantity: parseInt(this.form.quantity)
 				};
 				return this.$store.dispatch(STORE_CREATE_INGREDIENT_REQUEST, data);
+			},
+			deleteIngredient(index, ingredients) {
+				return this.$store.dispatch(STORE_DELETE_INGREDIENT_REQUEST, ingredients[index].uuid);
 			}
 		},
 		async asyncData({store}) {
