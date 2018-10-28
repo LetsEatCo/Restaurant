@@ -23,6 +23,25 @@
 					<el-button class="add-button" @click="addIngredient">Add Ingredient</el-button>
 				</div>
 			</el-dialog>
+			<el-dialog title="Edit Ingredient" custom-class="Actions__edit-dialog" :visible.sync="editFormVisible" top="30vh"
+								 width="35%">
+				<el-form ref="form" :model="editForm">
+					<el-form-item label="Ingredient Name">
+						<el-input placeholder="Eg. Salad" v-model="editForm.name" autocomplete="off">{{editForm.name}}</el-input>
+					</el-form-item>
+					<el-form-item label="Quantity">
+						<el-input placeholder="Ingredient quantity available in your stock" v-model="editForm.quantity"
+											autocomplete="off">{{editForm.name}}
+						</el-input>
+					</el-form-item>
+				</el-form>
+				<div slot="footer">
+					<el-button class="cancel-button"
+										 @click="editFormVisible = false">Cancel
+					</el-button>
+					<el-button class="add-button" @click="updateIngredient">Update Ingredient</el-button>
+				</div>
+			</el-dialog>
 		</div>
 		<el-table
 			class="Table"
@@ -45,8 +64,14 @@
 			<el-table-column
 				fixed="right"
 				label="Operations"
-				width="120">
+				width="220">
 				<template slot-scope="scope">
+					<el-button
+						@click.native.prevent="showEditForm(scope.$index, getIngredients)"
+						class="Table__delete-button"
+						size="small">
+						Update
+					</el-button>
 					<el-button
 						@click.native.prevent="deleteIngredient(scope.$index, getIngredients)"
 						class="Table__delete-button"
@@ -157,9 +182,9 @@
 </style>
 
 <style lang="scss">
-	.Actions__add-dialog {
+	.Actions__add-dialog, .Actions__edit-dialog {
 		position: absolute;
-		left: calc(50% + 12.5% - (3% * 2));
+		left: 50%;
 		transform: translateX(-50%);
 		border-radius: 0;
 		.el-dialog {
@@ -231,16 +256,23 @@
 	import {
 		STORE_CREATE_INGREDIENT_REQUEST, STORE_DELETE_INGREDIENT_REQUEST,
 		STORE_GET_INGREDIENTS_REQUEST,
-		STORE_GET_INGREDIENTS_REQUEST_SUCCESS
+		STORE_GET_INGREDIENTS_REQUEST_SUCCESS, STORE_UPDATE_INGREDIENT_REQUEST
 	} from '../../../store/actions/store/store.ingredients.actions';
 	import {mapGetters} from 'vuex';
+	import _ from 'lodash';
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
 		data() {
 			return {
 				addFormVisible: false,
+				editFormVisible: false,
 				form: {
+					name: '',
+					quantity: ''
+				},
+				editForm: {
+					uuid: '',
 					name: '',
 					quantity: ''
 				}
@@ -259,6 +291,17 @@
 			},
 			deleteIngredient(index, ingredients) {
 				return this.$store.dispatch(STORE_DELETE_INGREDIENT_REQUEST, ingredients[index].uuid);
+			},
+			updateIngredient() {
+				this.editForm.quantity = parseInt(this.editForm.quantity);
+				const data = _.pickBy(this.editForm, v => v !== null && v !== undefined && v !== '');
+				return this.$store.dispatch(STORE_UPDATE_INGREDIENT_REQUEST, data);
+			},
+			showEditForm(index, ingredients) {
+				this.editForm.uuid = ingredients[index].uuid;
+				this.editForm.name = ingredients[index].name;
+				this.editForm.quantity = ingredients[index].quantity;
+				this.editFormVisible = true;
 			}
 		},
 		async asyncData({store}) {
