@@ -5,6 +5,7 @@
 		</div>
 		<div class="Actions">
 			<el-button class="Actions__add-button" size="medium" @click="showAddForm">Add</el-button>
+			<AddProductForm/>
 		</div>
 		<el-table
 			class="Table"
@@ -52,8 +53,10 @@
 		STORE_GET_PRODUCTS_REQUEST,
 		STORE_GET_PRODUCTS_REQUEST_SUCCESS
 	} from '../../../store/actions/store/store.products.actions';
+	import AddProductForm from '../../../components/Dashboard/Product/AddProductForm';
 
 	export default {
+		components: {AddProductForm},
 		layout: 'Dashboard/DashboardLayout',
 		data() {
 			return {
