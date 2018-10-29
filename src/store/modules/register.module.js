@@ -13,7 +13,7 @@ const actions = {
 	[REGISTER_REQUEST]: function ({commit, dispatch}, data) {
 		return new Promise((resolve, reject) => {
 			commit(REGISTER_REQUEST);
-			this.$axios.$post('http://localhost/stores/register', data)
+			this.$axios.$post('/stores/register', data)
 				.then(res => {
 					this.$axios.setToken(res.data.jwt, 'Bearer');
 					commit(REGISTER_REQUEST_SUCCESS);

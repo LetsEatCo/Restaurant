@@ -1,4 +1,10 @@
+import ConfigWebpackPlugin from 'config-webpack';
 export default {
+	build: {
+		plugins: [
+			new ConfigWebpackPlugin()
+		]
+	},
 	head: {
 		link: [
 			{ rel: 'stylesheet', href: 'https://s3.eu-west-3.amazonaws.com/lets-eat-co/fonts/fonts.css' }
@@ -26,5 +32,10 @@ export default {
 	},
 	router: {
 		middleware: ['login-redirect']
+	},
+	axios: {
+		baseURL: process.env.NODE_ENV === 'development'
+			? process.env.DEV_API_BASE_URL
+			: process.env.PRODUCTION_API_BASE_URL
 	}
 };

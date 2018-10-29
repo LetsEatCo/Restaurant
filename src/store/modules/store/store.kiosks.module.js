@@ -21,7 +21,7 @@ const actions = {
 	[STORE_CREATE_KIOSK_REQUEST]: function ({commit, dispatch}, data) {
 		commit(STORE_CREATE_KIOSK_REQUEST);
 		this.$axios.setToken(JSON.parse(localStorage.getItem('store:persist')).storeModule.jwt, 'Bearer');
-		this.$axios.$post('http://localhost/stores/me/kiosks', data)
+		this.$axios.$post('/stores/me/kiosks', data)
 			.then(res => {
 				commit(STORE_CREATE_KIOSK_REQUEST_SUCCESS, res);
 			})

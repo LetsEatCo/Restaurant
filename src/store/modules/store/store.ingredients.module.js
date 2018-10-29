@@ -28,7 +28,7 @@ const actions = {
 		commit(STORE_CREATE_INGREDIENT_REQUEST);
 		return new Promise((resolve, reject) => {
 			this.$axios.setToken(this.app.store.getters.getToken, 'Bearer');
-			this.$axios.$post('http://localhost/stores/me/ingredients', data)
+			this.$axios.$post('/stores/me/ingredients', data)
 				.then(res => {
 					commit(STORE_CREATE_INGREDIENT_REQUEST_SUCCESS);
 					dispatch(STORE_GET_INGREDIENTS_REQUEST);
@@ -45,7 +45,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			this.$axios.setToken(this.$cookies.get('rootpersist').Store.jwt
 				|| this.app.store.getters.getToken, 'Bearer');
-			this.$axios.$get('http://localhost/stores/me/ingredients')
+			this.$axios.$get('/stores/me/ingredients')
 				.then(res => {
 					commit(STORE_GET_INGREDIENTS_REQUEST_SUCCESS, res);
 					resolve(res);
@@ -61,7 +61,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			this.$axios.setToken(this.$cookies.get('rootpersist').Store.jwt
 				|| this.app.store.getters.getToken, 'Bearer');
-			this.$axios.$delete(`http://localhost/stores/me/ingredients/${uuid}`)
+			this.$axios.$delete(`/stores/me/ingredients/${uuid}`)
 				.then(res => {
 					commit(STORE_DELETE_INGREDIENT_REQUEST_SUCCESS);
 					dispatch(STORE_GET_INGREDIENTS_REQUEST);
@@ -80,7 +80,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			this.$axios.setToken(this.$cookies.get('rootpersist').Store.jwt
 				|| this.app.store.getters.getToken, 'Bearer');
-			this.$axios.$patch(`http://localhost/stores/me/ingredients/${uuid}`, values)
+			this.$axios.$patch(`/stores/me/ingredients/${uuid}`, values)
 				.then(res => {
 					commit(STORE_UPDATE_INGREDIENT_REQUEST_SUCCESS);
 					dispatch(STORE_GET_INGREDIENTS_REQUEST);

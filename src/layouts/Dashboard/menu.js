@@ -12,24 +12,28 @@ export default {
 			index: '2'
 		},
 		{
-			title: true,
 			name: 'Stock',
-			url: '/ingredients',
+			url: '/stock',
 			index: '3'
 		},
 		{
+			name: 'Products',
+			url: '/products',
+			index: '4'
+		},
+		{
 			name: 'Profile',
-			index: '4',
+			index: '5',
 			children: [
 				{
 					name: 'View Profile',
 					url: '/profile',
-					index: '4-1'
+					index: '5-1'
 				},
 				{
 					name: 'Edit Profile',
 					url: '/profile/edit',
-					index: '4-2'
+					index: '5-2'
 				}
 			]
 		}
