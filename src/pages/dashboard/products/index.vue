@@ -14,15 +14,23 @@
 			style="width: 100%">
 			<el-table-column
 				type="selection"
-				width="55">
+				width="50%">
 			</el-table-column>
 			<el-table-column
 				property="reference"
 				label="Reference">
 			</el-table-column>
 			<el-table-column
+				property="ean13"
+				label="EAN13">
+			</el-table-column>
+			<el-table-column
 				property="name"
 				label="Name">
+			</el-table-column>
+			<el-table-column
+				property="description"
+				label="Description">
 			</el-table-column>
 			<el-table-column
 				property="price"
