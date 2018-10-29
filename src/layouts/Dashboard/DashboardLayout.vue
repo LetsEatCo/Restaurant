@@ -243,7 +243,7 @@
 				}
 			}
 		}
-		&__delete-button {
+		&__delete-button, &__view-button {
 			border-radius: 0;
 			color: black;
 			background-color: white;

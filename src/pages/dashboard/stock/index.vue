@@ -79,7 +79,6 @@
 		},
 		methods: {
 			showAddForm() {
-
 				this.addFormVisible ? eventBus.$emit('addIngredientFormVisible', false) : eventBus.$emit('addIngredientFormVisible', true);
 				eventBus.$on('addIngredientFormVisible', payload => {
 					this.addFormVisible = !payload;

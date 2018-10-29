@@ -12,28 +12,33 @@ export default {
 			index: '2'
 		},
 		{
+			name: 'Meals',
+			url: '/meals',
+			index: '3'
+		},
+		{
 			name: 'Stock',
 			url: '/stock',
-			index: '3'
+			index: '4'
 		},
 		{
 			name: 'Products',
 			url: '/products',
-			index: '4'
+			index: '5'
 		},
 		{
 			name: 'Profile',
-			index: '5',
+			index: '6',
 			children: [
 				{
 					name: 'View Profile',
 					url: '/profile',
-					index: '5-1'
+					index: '6-1'
 				},
 				{
 					name: 'Edit Profile',
 					url: '/profile/edit',
-					index: '5-2'
+					index: '6-2'
 				}
 			]
 		}

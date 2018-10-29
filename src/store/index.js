@@ -7,6 +7,7 @@ import {
 	storeKiosksModule as StoreKiosks,
 	storeIngredientsModule as StoreIngredients,
 	storeProductsModule as StoreProducts,
+	storeMealsModule as StoreMeals
 } from './modules/store';
 import {STORE_PROFILE_REQUEST} from './actions/store/store.actions';
 
@@ -18,6 +19,7 @@ const store = () => {
 			Auth,
 			Register,
 			Store,
+			StoreMeals,
 			StoreProducts,
 			StoreIngredients,
 			StoreKiosks
