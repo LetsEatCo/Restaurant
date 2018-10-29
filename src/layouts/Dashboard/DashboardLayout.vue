@@ -161,6 +161,35 @@
 				}
 			}
 		}
+		.el-input-number {
+			input {
+				border-radius: 0;
+				&:focus, &:hover {
+					border-color: black;
+				}
+			}
+			.el-input-number__decrease:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled),
+			.el-input-number__increase:hover:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+				border-color: black;
+			}
+			.el-input-number__decrease:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled),
+			.el-input-number__increase:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+				border-color: #dcdfe6;
+			}
+
+			.el-input-number__decrease:hover,
+			.el-input-number__increase:hover {
+				color: black;
+			}
+		}
+		.el-textarea {
+			textarea {
+				border-radius: 0;
+				&:focus {
+					border-color: black;
+				}
+			}
+		}
 	}
 
 	.Table {
