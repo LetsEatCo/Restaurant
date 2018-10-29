@@ -99,6 +99,22 @@
 		left: 50%;
 		transform: translateX(-50%);
 		border-radius: 0;
+		&__tabs {
+			display: flex;
+			margin-top: -30px;
+			margin-bottom: 10px;
+			position: relative;
+			padding: 10px 0;
+
+			> * {
+				margin-right: 35px;
+				color: black;
+				text-transform: uppercase;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
 		.el-dialog {
 			&__header {
 				position: relative;
@@ -226,6 +242,10 @@
 
 	.el-cascader .el-input.is-focus .el-input__inner {
 		border-color: black;
+	}
+
+	.el-select-dropdown__item.selected {
+		color: black;
 	}
 
 	.Table {

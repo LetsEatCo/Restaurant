@@ -5,6 +5,7 @@
 		</div>
 		<div class="Actions">
 			<el-button class="Actions__add-button" size="medium" @click="showAddForm">Add</el-button>
+			<AddMealForm/>
 		</div>
 		<el-table
 			class="Table"
@@ -56,9 +57,15 @@
 		STORE_GET_MEALS_REQUEST,
 		STORE_GET_MEALS_REQUEST_SUCCESS
 	} from '../../../store/actions/store/store.meals.actions';
+	import AddMealForm from '../../../components/Dashboard/Meal/AddMealForm';
+	import {
+		STORE_GET_PRODUCTS_REQUEST,
+		STORE_GET_PRODUCTS_REQUEST_SUCCESS
+	} from '../../../store/actions/store/store.products.actions';
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
+		components: {AddMealForm},
 		data() {
 			return {};
 		},
@@ -67,8 +74,8 @@
 		},
 		methods: {
 			showAddForm() {
-				this.addFormVisible ? eventBus.$emit('addProductFormVisible', false) : eventBus.$emit('addProductFormVisible', true);
-				eventBus.$on('addProductFormVisible', payload => {
+				this.addFormVisible ? eventBus.$emit('addMealFormVisible', false) : eventBus.$emit('addMealFormVisible', true);
+				eventBus.$on('addMealFormVisible', payload => {
 					this.addFormVisible = !payload;
 				});
 			},
@@ -78,7 +85,10 @@
 		},
 		async asyncData({store}) {
 			const meals = await store.dispatch(STORE_GET_MEALS_REQUEST);
+			const products = await store.dispatch(STORE_GET_PRODUCTS_REQUEST);
+
 			store.commit(STORE_GET_MEALS_REQUEST_SUCCESS, meals);
+			store.commit(STORE_GET_PRODUCTS_REQUEST_SUCCESS, products);
 		}
 	};
 </script>
