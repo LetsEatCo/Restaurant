@@ -20,7 +20,8 @@ const state = {
 };
 
 const getters = {
-	getIngredients: state => state.ingredients
+	getIngredients: state => state.ingredients,
+	getIngredientByUuid: (state) => uuid => state.ingredients.find(ingredient => ingredient.uuid === uuid)
 };
 
 const actions = {

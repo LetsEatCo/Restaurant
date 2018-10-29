@@ -19,6 +19,16 @@
 			<el-form-item label="Description">
 				<el-input type="textarea" v-model="form.description" autocomplete="off"></el-input>
 			</el-form-item>
+			<el-form-item label="Ingredients">
+				<el-cascader multiple placeholder="Ingredients"
+										 :options="options()" @change="addProductIngredient">
+				</el-cascader>
+			</el-form-item>
+			<el-form-item>
+				<el-tag :key="ingredient.ingredientUuid" v-for="ingredient in form.ingredients" closable @close="handleTagClose(ingredient)">
+					{{getIngredientByUuid(ingredient.ingredientUuid).name}} ({{ingredient.quantity}})
+				</el-tag>
+			</el-form-item>
 		</el-form>
 		<div slot="footer">
 			<el-button class="cancel-button"
@@ -32,6 +42,8 @@
 <script>
 	import eventBus from '../../../utils/event-bus';
 	import {STORE_CREATE_PRODUCT_REQUEST} from '../../../store/actions/store/store.products.actions';
+	import {mapGetters} from 'vuex';
+	import {quantityRange} from '../../../utils/quantity-range';
 
 	export default {
 		name: 'AddProductForm',
@@ -43,7 +55,8 @@
 					ean13: '',
 					name: '',
 					price: '',
-					description: ''
+					description: '',
+					ingredients: []
 				},
 				rules: {
 					reference: [
@@ -63,7 +76,30 @@
 				}
 			};
 		},
+		computed: {
+			...mapGetters(['getIngredients', 'getIngredientByUuid'])
+		},
 		methods: {
+			options() {
+				const options = [];
+				this.getIngredients.forEach((ingredient) => {
+					options.push({
+						value: ingredient.uuid,
+						label: ingredient.name,
+						children: quantityRange()
+					});
+				});
+				return options;
+			},
+			addProductIngredient(value) {
+				if (this.form.ingredients.some(ingredient => ingredient.ingredientUuid === value[0])){
+					return false;
+				}
+				this.form.ingredients.push({ingredientUuid: value[0], quantity: value[1]});
+			},
+			handleTagClose(tag){
+				this.form.ingredients.splice(this.form.ingredients.indexOf(tag), 1);
+			},
 			showForm() {
 				eventBus.$on('addProductFormVisible', payload => {
 					this.formVisible = payload;
@@ -83,7 +119,8 @@
 							ean13: this.form.ean13,
 							name: this.form.name,
 							price: this.form.price.toString(),
-							description: this.form.description
+							description: this.form.description,
+							ingredients: this.form.ingredients
 						};
 						return this.$store.dispatch(STORE_CREATE_PRODUCT_REQUEST, data);
 					} else {

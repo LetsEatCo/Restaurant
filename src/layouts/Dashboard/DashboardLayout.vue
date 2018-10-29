@@ -182,6 +182,11 @@
 				color: black;
 			}
 		}
+
+		.el-select .el-input.is-focus .el-input__inner {
+			border-color: black;
+		}
+
 		.el-textarea {
 			textarea {
 				border-radius: 0;
@@ -190,6 +195,37 @@
 				}
 			}
 		}
+		.el-select, .el-cascader {
+			width: 100%;
+		}
+
+		.el-tag {
+			color: black;
+			border-color: #dcdfe6;
+			border-radius: 0;
+			margin-right: 5px;
+			background-color: white;
+
+			.el-tag__close {
+				color: black;
+
+				&:hover {
+					background-color: initial;
+				}
+			}
+		}
+	}
+	.el-select-dropdown.is-multiple .el-select-dropdown__item.selected {
+		color: black;
+	}
+
+	.el-cascader-menu__item.is-active {
+		color: black;
+		font-weight: 600;
+	}
+
+	.el-cascader .el-input.is-focus .el-input__inner {
+		border-color: black;
 	}
 
 	.Table {
