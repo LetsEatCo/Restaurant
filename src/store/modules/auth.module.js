@@ -13,7 +13,7 @@ const actions = {
 	[AUTH_REQUEST]: function ({commit, dispatch}, credentials) {
 		return new Promise((resolve, reject) => {
 			commit(AUTH_REQUEST);
-			this.$axios.$post('http://localhost/stores/login', credentials)
+			this.$axios.$post('/stores/login', credentials)
 				.then(res => {
 					this.$axios.setToken(res.data.jwt, 'Bearer');
 					commit(AUTH_SUCCESS);

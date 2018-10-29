@@ -5,9 +5,9 @@ import {default as Register} from './modules/register.module';
 import {
 	storeModule as Store,
 	storeKiosksModule as StoreKiosks,
-	storeIngredientsModule as StoreIngredients
+	storeIngredientsModule as StoreIngredients,
+	storeProductsModule as StoreProducts,
 } from './modules/store';
-import auth from '../plugins/auth';
 import {STORE_PROFILE_REQUEST} from './actions/store/store.actions';
 
 Vue.use(Vuex);
@@ -18,8 +18,9 @@ const store = () => {
 			Auth,
 			Register,
 			Store,
-			StoreKiosks,
-			StoreIngredients
+			StoreProducts,
+			StoreIngredients,
+			StoreKiosks
 		},
 		actions: {
 			nuxtServerInit({commit}, {req, isClient, isServer, store, app: {$cookies, $axios}}) {

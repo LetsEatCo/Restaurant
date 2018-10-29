@@ -25,7 +25,7 @@ const getters = {
 const actions = {
 	[STORE_PROFILE_REQUEST]: function ({commit, dispatch}, jwt) {
 		commit(STORE_PROFILE_REQUEST, jwt);
-		this.$axios.$get('http://localhost/stores/me')
+		this.$axios.$get('/stores/me')
 			.then(res => {
 				commit(STORE_PROFILE_REQUEST_SUCCESS, res);
 				this.$router.push('/dashboard');
@@ -37,7 +37,7 @@ const actions = {
 	[STORE_EDIT_PROFILE_REQUEST]: function({commit, dispatch}, data){
 
 		commit(STORE_EDIT_PROFILE_REQUEST);
-		this.$axios.$patch('http://localhost/stores/me', data)
+		this.$axios.$patch('/stores/me', data)
 			.then(res => {
 				commit(STORE_EDIT_PROFILE_REQUEST_SUCCESS, res);
 			})
