@@ -1,6 +1,6 @@
-export function quantityRange() {
+export function quantityRange(min, max) {
 	const quantity = [];
-	for (let i = 1; i <= 50; i++) {
+	for (let i = min; i <= max; i++) {
 		quantity.push({
 			value: i,
 			label: i
