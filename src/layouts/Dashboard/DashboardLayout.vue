@@ -105,14 +105,103 @@
 			margin-bottom: 10px;
 			position: relative;
 			padding: 10px 0;
+			align-items: center;
 
-			> * {
+			> p {
 				margin-right: 35px;
 				color: black;
 				text-transform: uppercase;
 				&:hover {
 					cursor: pointer;
 				}
+			}
+			button {
+				color: white;
+				text-transform: uppercase;
+				font-size: 11px;
+				padding: 0 12px;
+				border: none;
+				height: 32px;
+				border-radius: 0;
+				margin-left: auto;
+				background-color: black;
+				&:hover {
+					color: white;
+					background-color: black;
+					border: none;
+				}
+			}
+		}
+		&__subsection {
+			margin-bottom: 60px;
+			&__header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin: 20px 0 0;
+				> p {
+					margin: 0;
+				}
+				&__title {
+					color: black;
+					text-transform: uppercase;
+					font-size: 14px;
+					font-weight: 500;
+				}
+
+				&__button{
+					color: black;
+					text-transform: uppercase;
+					font-size: 12px;
+					&:hover {
+						color: black;
+					}
+				}
+			}
+			&__actions {
+				display: flex;
+				justify-content: flex-end;
+			}
+			&__input-number {
+				display: flex;
+				margin-bottom: 30px;
+				align-items: flex-end;
+				> * {
+					margin-right: 20px;
+					p {
+						color: black;
+					}
+				}
+			}
+
+			&__add-option {
+				display: flex;
+				justify-content: space-evenly;
+				button {
+					color: black;
+					text-transform: uppercase;
+					font-weight: 500;
+					font-size: 12px;
+				}
+			}
+
+			.el-checkbox {
+				&__label {
+					color: black;
+				}
+			}
+			.el-checkbox__input.is-checked + .el-checkbox__label {
+				color: black;
+			}
+			.el-checkbox__input.is-checked .el-checkbox__inner {
+				background-color: black;
+				border-color: black;
+			}
+			.el-checkbox__inner:hover {
+				border-color: black;
+			}
+			.el-cascader {
+				width: 50% !important;
 			}
 		}
 		.el-dialog {
@@ -231,6 +320,7 @@
 			}
 		}
 	}
+
 	.el-select-dropdown.is-multiple .el-select-dropdown__item.selected {
 		color: black;
 	}

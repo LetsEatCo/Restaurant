@@ -14,7 +14,7 @@
 				<el-input placeholder="Eg. Burger, Sushi, Tacos" v-model="form.name" autocomplete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="Price" prop="price">
-				<el-input-number :min="0" placeholder="In €" v-model="form.price" autocomplete="off"></el-input-number>
+				<el-input-number :precision="2" :step="0.01" :min="0" placeholder="In €" v-model="form.price" autocomplete="off"></el-input-number>
 			</el-form-item>
 			<el-form-item label="Description">
 				<el-input type="textarea" v-model="form.description" autocomplete="off"></el-input>
