@@ -44,6 +44,12 @@
 						size="small">
 						View
 					</el-button>
+					<el-button
+						@click.native.prevent="deleteMeal(scope.$index, getMeals)"
+						class="Table__view-button"
+						size="small">
+						Delete
+					</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -55,7 +61,8 @@
 	import eventBus from '../../../utils/event-bus';
 	import {
 		STORE_GET_MEALS_REQUEST,
-		STORE_GET_MEALS_REQUEST_SUCCESS
+		STORE_GET_MEALS_REQUEST_SUCCESS,
+		STORE_DELETE_MEAL_REQUEST
 	} from '../../../store/actions/store/store.meals.actions';
 	import AddMealForm from '../../../components/Dashboard/Meal/AddMealForm';
 	import {
@@ -81,6 +88,9 @@
 			},
 			viewMeal(index, meals) {
 				this.$router.push(`/dashboard/meals/${meals[index].uuid}`);
+			},
+			deleteMeal(index, meals){
+				return this.$store.dispatch(STORE_DELETE_MEAL_REQUEST, meals[index].uuid);
 			}
 		},
 		async asyncData({store}) {
