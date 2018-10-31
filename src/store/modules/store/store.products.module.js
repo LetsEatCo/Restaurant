@@ -16,7 +16,7 @@ import {
 
 const state = {
 	status: '',
-	products: ''
+	products: []
 };
 
 const getters = {

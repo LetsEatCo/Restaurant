@@ -14,7 +14,7 @@
 				<el-input placeholder="Eg. Burger, Sushi, Tacos" v-model="form.name" autocomplete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="Price" prop="price">
-				<el-input-number :min="0" placeholder="In €" v-model="form.price" autocomplete="off"></el-input-number>
+				<el-input-number :precision="2" :step="0.01" :min="0" placeholder="In €" v-model="form.price" autocomplete="off"></el-input-number>
 			</el-form-item>
 			<el-form-item label="Description">
 				<el-input type="textarea" v-model="form.description" autocomplete="off"></el-input>
@@ -25,7 +25,8 @@
 				</el-cascader>
 			</el-form-item>
 			<el-form-item>
-				<el-tag :key="ingredient.ingredientUuid" v-for="ingredient in form.ingredients" closable @close="handleTagClose(ingredient)">
+				<el-tag :key="ingredient.ingredientUuid" v-for="ingredient in form.ingredients" closable
+								@close="handleTagClose(ingredient)">
 					{{getIngredientByUuid(ingredient.ingredientUuid).name}} ({{ingredient.quantity}})
 				</el-tag>
 			</el-form-item>
@@ -86,18 +87,18 @@
 					options.push({
 						value: ingredient.uuid,
 						label: ingredient.name,
-						children: quantityRange()
+						children: quantityRange(1, 50)
 					});
 				});
 				return options;
 			},
 			addProductIngredient(value) {
-				if (this.form.ingredients.some(ingredient => ingredient.ingredientUuid === value[0])){
+				if (this.form.ingredients.some(ingredient => ingredient.ingredientUuid === value[0])) {
 					return false;
 				}
 				this.form.ingredients.push({ingredientUuid: value[0], quantity: value[1]});
 			},
-			handleTagClose(tag){
+			handleTagClose(tag) {
 				this.form.ingredients.splice(this.form.ingredients.indexOf(tag), 1);
 			},
 			showForm() {
