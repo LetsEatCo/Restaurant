@@ -130,7 +130,7 @@
 	import {mapGetters} from 'vuex';
 	import {quantityRange} from '../../../utils/quantity-range';
 	import {STORE_CREATE_MEAL_REQUEST} from '../../../store/actions/store/store.meals.actions';
-	import traverse from 'traverse';
+	// import traverse from 'traverse';
 
 	export default {
 		name: 'AddMealForm',
