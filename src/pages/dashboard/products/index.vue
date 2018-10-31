@@ -6,6 +6,7 @@
 		<div class="Actions">
 			<el-button class="Actions__add-button" size="medium" @click="showAddForm">Add</el-button>
 			<AddProductForm/>
+			<EditProductForm/>
 		</div>
 		<el-table
 			class="Table"
@@ -43,12 +44,12 @@
 				width="220">
 
 				<template slot-scope="scope">
-					<!--<el-button-->
-						<!--@click.native.prevent="showEditForm(scope.$index, getProducts)"-->
-						<!--class="Table__delete-button"-->
-						<!--size="small">-->
-						<!--Update-->
-					<!--</el-button>-->
+					<el-button
+						@click.native.prevent="showEditForm(scope.$index, getProducts)"
+						class="Table__delete-button"
+						size="small">
+						Update
+					</el-button>
 					<el-button
 						@click.native.prevent="deleteProduct(scope.$index, getProducts)"
 						class="Table__delete-button"
@@ -67,15 +68,31 @@
 	import {
 		STORE_GET_PRODUCTS_REQUEST,
 		STORE_GET_PRODUCTS_REQUEST_SUCCESS,
-		STORE_DELETE_PRODUCT_REQUEST
+		STORE_DELETE_PRODUCT_REQUEST,
+
 	} from '../../../store/actions/store/store.products.actions';
+	import {
+		STORE_GET_INGREDIENTS_REQUEST,
+		STORE_GET_INGREDIENTS_REQUEST_SUCCESS,
+	} from '../../../store/actions/store/store.ingredients.actions';
 	import AddProductForm from '../../../components/Dashboard/Product/AddProductForm';
+	import EditProductForm from '../../../components/Dashboard/Product/EditProductForm';
 
 	export default {
-		components: {AddProductForm},
+		components: {EditProductForm, AddProductForm  },
 		layout: 'Dashboard/DashboardLayout',
 		data() {
 			return {
+				editFormVisible: this.showEditForm() || false,
+				editForm: {
+					uuid: '',
+					reference: '',
+					ean13: '',
+					name: '',
+					price: '',
+					description: '',
+					ingredients: []
+				}
 
 			};
 		},
@@ -89,11 +106,36 @@
 					this.addFormVisible = !payload;
 				});
 			},
+			showEditForm(index, products) {
+				let data = {};
+				if (products) {
+					data = {
+						uuid: products[index].uuid,
+						reference: products[index].reference,
+						ean13: products[index].ean13,
+						name: products[index].name,
+						price: products[index].price,
+						description: products[index].description,
+						// ingredients: products[index].ingredients
+					};
+				}
+				this.editFormVisible
+					? eventBus.$emit('editProductFormVisible', {data: data || null, visible: false})
+					: eventBus.$emit('editProductFormVisible', {data: data || null, visible: true});
+
+				eventBus.$on('editProductFormVisible', payload => {
+					this.editFormVisible = !payload.visible;
+				});
+			},
 			deleteProduct(index, products) {
 				return this.$store.dispatch(STORE_DELETE_PRODUCT_REQUEST, products[index].uuid);
 			},
 		},
 		async asyncData({store}) {
+
+			const ingredients = await store.dispatch(STORE_GET_INGREDIENTS_REQUEST);
+			store.commit(STORE_GET_INGREDIENTS_REQUEST_SUCCESS, ingredients);
+
 			const products = await store.dispatch(STORE_GET_PRODUCTS_REQUEST);
 			store.commit(STORE_GET_PRODUCTS_REQUEST_SUCCESS, products);
 		}
