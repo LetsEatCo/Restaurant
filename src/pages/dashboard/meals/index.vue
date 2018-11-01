@@ -6,6 +6,7 @@
 		<div class="Actions">
 			<el-button class="Actions__add-button" size="medium" @click="showAddForm">Add</el-button>
 			<AddMealForm/>
+			<EditMealForm/>
 		</div>
 		<el-table
 			class="Table"
@@ -36,13 +37,19 @@
 			<el-table-column
 				fixed="right"
 				label="Operations"
-				width="220">
+				width="250">
 				<template slot-scope="scope">
 					<el-button
 						@click.native.prevent="viewMeal(scope.$index, getMeals)"
 						class="Table__view-button"
 						size="small">
 						View
+					</el-button>
+					<el-button
+						@click.native.prevent="showEditForm(scope.$index, getMeals)"
+						class="Table__view-button"
+						size="small">
+						Update
 					</el-button>
 					<el-button
 						@click.native.prevent="deleteMeal(scope.$index, getMeals)"
@@ -65,6 +72,7 @@
 		STORE_DELETE_MEAL_REQUEST
 	} from '../../../store/actions/store/store.meals.actions';
 	import AddMealForm from '../../../components/Dashboard/Meal/AddMealForm';
+	import EditMealForm from '../../../components/Dashboard/Meal/EditMealForm';
 	import {
 		STORE_GET_PRODUCTS_REQUEST,
 		STORE_GET_PRODUCTS_REQUEST_SUCCESS
@@ -72,9 +80,9 @@
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
-		components: {AddMealForm},
+		components: {AddMealForm, EditMealForm },
 		data() {
-			return {};
+			return {editFormVisible: this.showEditForm() || false};
 		},
 		computed: {
 			...mapGetters(['getMeals'])
@@ -91,6 +99,28 @@
 			},
 			deleteMeal(index, meals){
 				return this.$store.dispatch(STORE_DELETE_MEAL_REQUEST, meals[index].uuid);
+			},
+			showEditForm(index, meals) {
+				let data = {};
+				if (meals) {
+
+					data = {
+						uuid: meals[index].uuid,
+						reference: meals[index].reference,
+						name: meals[index].name,
+						description: meals[index].description,
+						price: meals[index].price,
+						productQuantity: meals[index].productQuantity,
+						subsections: meals[index].subsections
+					};
+				}
+				this.editFormVisible
+					? eventBus.$emit('editMealFormVisible', {data: data || null, visible: false})
+					: eventBus.$emit('editMealFormVisible', {data: data || null, visible: true});
+
+				eventBus.$on('editMealFormVisible', payload => {
+					this.editFormVisible = !payload.visible;
+				});
 			}
 		},
 		async asyncData({store}) {
