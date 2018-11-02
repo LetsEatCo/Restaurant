@@ -24,7 +24,7 @@
 					<el-input type="textarea" v-model="form.description" autocomplete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="Product" prop="product">
-					<el-select v-model="form.optionProductUuid" placeholder="Select"
+					<el-select v-model="form.optionProductUuid" :placeholder="form.optionProductUuid"
 										 @change="handleProductSelectChange(form.optionProductUuid)">
 						<el-option
 							v-for="product in getProducts"
@@ -71,7 +71,8 @@
 					</div>
 					<el-form-item label="Ingredient" v-for="(optionIngredient, index) in subsection.options.ingredients"
 												:key="index">
-						<el-select v-model="optionIngredient.optionIngredientUuid" placeholder="Select">
+						<el-select v-model="optionIngredient.optionIngredientUuid" :placeholder="optionIngredient.ingredient.name">
+
 							<el-option
 								v-for="ingredient in getIngredients"
 								:key="ingredient.uuid"
@@ -93,7 +94,7 @@
 					</el-form-item>
 					<el-form-item label="Product" v-for="(optionProduct, index) in subsection.options.products"
 												:key="index">
-						<el-select v-model="optionProduct.optionProductUuid" placeholder="Select">
+						<el-select v-model="optionProduct.optionProductUuid" :placeholder="optionProduct.product.name">
 							<el-option
 								v-for="product in getProducts"
 								:key="product.uuid"
@@ -269,10 +270,7 @@
 				this.$refs[form].validate((valid) => {
 					if (valid) {
 
-						// let copyForm = _.cloneDeep(form);
 						this.form.subsections.forEach((subsection, subIdx) => {
-
-							console.log(this.form.subsections[subIdx].createdAt);
 
 							this.form.subsections[subIdx].subsectionUuid = subsection.uuid;
 							delete this.form.subsections[subIdx].uuid;
@@ -295,7 +293,7 @@
 								this.form.subsections[subIdx].options.products[prodIdx].price
 									= this.form.subsections[subIdx].options.products[prodIdx].price.toString();
 
-								// Delete fields for API Data's validation
+								// Delete fields for API Data validation
 
 								delete this.form.subsections[subIdx].options.uuid;
 								delete this.form.subsections[subIdx].options.createdAt;
@@ -319,7 +317,10 @@
 						};
 						// Reset deleted Values
 						// this.form = copyForm;
-						return this.$store.dispatch(STORE_UPDATE_MEAL_REQUEST, data);
+						this.$store.dispatch(STORE_UPDATE_MEAL_REQUEST, data);
+						this.form = {};
+						this.closeForm();
+						return true;
 					} else {
 						return false;
 					}
