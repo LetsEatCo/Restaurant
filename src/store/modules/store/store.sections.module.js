@@ -14,7 +14,10 @@ import {
 	STORE_DELETE_SECTION_REQUEST_ERROR,
 	STORE_UPDATE_SECTION_REQUEST,
 	STORE_UPDATE_SECTION_REQUEST_SUCCESS,
-	STORE_UPDATE_SECTION_REQUEST_ERROR
+	STORE_UPDATE_SECTION_REQUEST_ERROR,
+	STORE_ADD_SECTION_PRODUCT_REQUEST,
+	STORE_ADD_SECTION_PRODUCT_REQUEST_ERROR,
+	STORE_ADD_SECTION_PRODUCT_REQUEST_SUCCESS
 
 } from "../../actions/store/store.sections.actions";
 
@@ -42,6 +45,25 @@ const actions = {
 				})
 				.catch(err => {
 					commit(STORE_CREATE_SECTION_REQUEST_ERROR);
+					reject(err);
+				});
+		});
+	},
+
+	[STORE_ADD_SECTION_PRODUCT_REQUEST]: function ({commit, dispatch}, data) {
+		commit(STORE_CREATE_SECTION_REQUEST);
+		return new Promise((resolve, reject) => {
+
+			const {uuid, ...values} = data;
+			this.$axios.setToken(this.app.store.getters.getToken, 'Bearer');
+			this.$axios.$post(`/stores/me/sections/${uuid}/add`, values)
+				.then(res => {
+					commit(STORE_ADD_SECTION_PRODUCT_REQUEST);
+					dispatch(STORE_GET_SECTIONS_REQUEST);
+					resolve(res);
+				})
+				.catch(err => {
+					commit(STORE_ADD_SECTION_PRODUCT_REQUEST_ERROR);
 					reject(err);
 				});
 		});
@@ -109,6 +131,15 @@ const mutations = {
 		state.status = 'success';
 	},
 	[STORE_CREATE_SECTION_REQUEST_ERROR]: state => {
+		state.status = 'error';
+	},
+	[STORE_ADD_SECTION_PRODUCT_REQUEST]: (state) => {
+		state.status = 'loading';
+	},
+	[STORE_ADD_SECTION_PRODUCT_REQUEST_SUCCESS]: (state) => {
+		state.status = 'success';
+	},
+	[STORE_ADD_SECTION_PRODUCT_REQUEST_ERROR]: (state) => {
 		state.status = 'error';
 	},
 	[STORE_GET_SECTIONS_REQUEST]: (state) => {
