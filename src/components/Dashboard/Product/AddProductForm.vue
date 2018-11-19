@@ -1,43 +1,99 @@
 <template>
-	<el-dialog title="Add Product" custom-class="Actions__add-dialog" :visible.sync="formVisible" top="10vh"
-						 width="35%" @close="closeForm()">
-		<el-form label-position="top" ref="form" :model="form" :rules="rules">
-			<el-form-item label="Reference" prop="reference">
-				<el-input placeholder="Product Reference" v-model="form.reference"
-									autocomplete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="EAN13" prop="ean13">
-				<el-input placeholder="EAN13 code" v-model="form.ean13"
-									autocomplete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="Product Name" prop="name">
-				<el-input placeholder="Eg. Burger, Sushi, Tacos" v-model="form.name" autocomplete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="Price" prop="price">
-				<el-input-number :precision="2" :step="0.01" :min="0" placeholder="In €" v-model="form.price" autocomplete="off"></el-input-number>
-			</el-form-item>
-			<el-form-item label="Description">
-				<el-input type="textarea" v-model="form.description" autocomplete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="Ingredients">
-				<el-cascader multiple placeholder="Ingredients"
-										 :options="options()" @change="addProductIngredient">
-				</el-cascader>
-			</el-form-item>
-			<el-form-item>
-				<el-tag :key="ingredient.ingredientUuid" v-for="ingredient in form.ingredients" closable
-								@close="handleTagClose(ingredient)">
-					{{getIngredientByUuid(ingredient.ingredientUuid).name}} ({{ingredient.quantity}})
-				</el-tag>
-			</el-form-item>
-		</el-form>
-		<div slot="footer">
-			<el-button class="cancel-button"
-								 @click="formVisible = false">Cancel
-			</el-button>
-			<el-button class="add-button" @click="addProduct('form')">Add Product</el-button>
-		</div>
-	</el-dialog>
+  <el-dialog 
+    title="Add Product" 
+    custom-class="Actions__add-dialog" 
+    :visible.sync="formVisible" 
+    top="10vh"
+    width="35%" 
+    @close="closeForm()"
+  >
+    <el-form 
+      label-position="top" 
+      ref="form" 
+      :model="form" 
+      :rules="rules"
+    >
+      <el-form-item 
+        label="Reference" 
+        prop="reference"
+      >
+        <el-input 
+          placeholder="Product Reference" 
+          v-model="form.reference"
+          autocomplete="off"
+        />
+      </el-form-item>
+      <el-form-item 
+        label="EAN13" 
+        prop="ean13"
+      >
+        <el-input 
+          placeholder="EAN13 code" 
+          v-model="form.ean13"
+          autocomplete="off"
+        />
+      </el-form-item>
+      <el-form-item 
+        label="Product Name" 
+        prop="name"
+      >
+        <el-input 
+          placeholder="Eg. Burger, Sushi, Tacos" 
+          v-model="form.name" 
+          autocomplete="off"
+        />
+      </el-form-item>
+      <el-form-item 
+        label="Price" 
+        prop="price"
+      >
+        <el-input-number 
+          :precision="2" 
+          :step="0.01" 
+          :min="0" 
+          placeholder="In €" 
+          v-model="form.price" 
+          autocomplete="off"
+        />
+      </el-form-item>
+      <el-form-item label="Description">
+        <el-input 
+          type="textarea" 
+          v-model="form.description" 
+          autocomplete="off"
+        />
+      </el-form-item>
+      <el-form-item label="Ingredients">
+        <el-cascader 
+          multiple 
+          placeholder="Ingredients"
+          :options="options()" 
+          @change="addProductIngredient"
+        />
+      </el-form-item>
+      <el-form-item>
+        <el-tag 
+          :key="ingredient.ingredientUuid" 
+          v-for="ingredient in form.ingredients" 
+          closable
+          @close="handleTagClose(ingredient)"
+        >
+          {{ getIngredientByUuid(ingredient.ingredientUuid).name }} ({{ ingredient.quantity }})
+        </el-tag>
+      </el-form-item>
+    </el-form>
+    <div slot="footer">
+      <el-button 
+        class="cancel-button"
+        @click="formVisible = false"
+      >Cancel
+      </el-button>
+      <el-button 
+        class="add-button" 
+        @click="addProduct('form')"
+      >Add Product</el-button>
+    </div>
+  </el-dialog>
 </template>
 
 <script>

@@ -1,9 +1,9 @@
 <template>
-	<el-container>
-		<el-main>
-			<AddKioskForm/>
-		</el-main>
-	</el-container>
+  <el-container>
+    <el-main>
+      <AddKioskForm />
+    </el-main>
+  </el-container>
 </template>
 
 <script>

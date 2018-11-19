@@ -1,20 +1,30 @@
 <template>
-	<div v-if="!item.children">
-		<nuxt-link v-if="item.url && !item.children" :to="'/dashboard'+item.url" append class="Sidebar-Item__link">
-			<el-menu-item :index="item.index">
-				<span slot="title">{{item.name}}</span>
-			</el-menu-item>
-		</nuxt-link>
-	</div>
-	<div v-else-if="item.children">
-		<el-submenu :index="item.index">
-			<template slot="title">
-				<span slot="title">{{item.name}}</span>
-			</template>
-			<SidebarItem v-for="child in item.children" :key="child.name" :item="child" :url="child.url"
-									 :index="child.index"/>
-		</el-submenu>
-	</div>
+  <div v-if="!item.children">
+    <nuxt-link 
+      v-if="item.url && !item.children" 
+      :to="'/dashboard'+item.url" 
+      append 
+      class="Sidebar-Item__link"
+    >
+      <el-menu-item :index="item.index">
+        <span slot="title">{{ item.name }}</span>
+      </el-menu-item>
+    </nuxt-link>
+  </div>
+  <div v-else-if="item.children">
+    <el-submenu :index="item.index">
+      <template slot="title">
+        <span slot="title">{{ item.name }}</span>
+      </template>
+      <SidebarItem 
+        v-for="child in item.children" 
+        :key="child.name" 
+        :item="child" 
+        :url="child.url"
+        :index="child.index"
+      />
+    </el-submenu>
+  </div>
 </template>
 
 <script>
