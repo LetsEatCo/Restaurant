@@ -78,7 +78,6 @@
 		},
 		methods: {
 			showAddForm() {
-				console.log(this.getSections);
 				this.addFormVisible ? eventBus.$emit('addSectionFormVisible', false) : eventBus.$emit('addSectionFormVisible', true);
 				eventBus.$on('addSectionFormVisible', payload => {
 					this.addFormVisible = !payload;
