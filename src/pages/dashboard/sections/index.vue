@@ -1,55 +1,64 @@
 <template>
-	<div>
-		<div class="Title">
-			<h1>Sections</h1>
-		</div>
-		<div class="Actions">
-			<el-button class="Actions__add-button" size="medium" @click="showAddForm">Add</el-button>
+  <div>
+    <div class="Title">
+      <h1>Sections</h1>
+    </div>
+    <div class="Actions">
+      <el-button
+        class="Actions__add-button"
+        size="medium"
+        @click="showAddForm"
+      >Add</el-button>
 
-			<AddSectionForm/>
-		</div>
+      <AddSectionForm />
+    </div>
 
-		<el-table
-			class="Table"
-			ref="multipleTable"
-			:data="this.getSections"
-			stripe
-			style="width: 100%">
-			<el-table-column
-				type="selection"
-				width="50%">
-			</el-table-column>
-			<el-table-column
-				property="name"
-				label="Name">
-			</el-table-column>
-			<el-table-column
-				fixed="right"
-				label="Operations"
-				width="250">
-				<template slot-scope="scope">
-					<el-button
-						@click.native.prevent="viewSection(scope.$index, getSections)"
-						class="Table__view-button"
-						size="small">
-						View
-					</el-button>
-					<el-button
-						@click.native.prevent="showEditForm(scope.$index, getSections)"
-						class="Table__view-button"
-						size="small">
-						Update
-					</el-button>
-					<el-button
-						@click.native.prevent="deleteSection(scope.$index, getSections)"
-						class="Table__view-button"
-						size="small">
-						Delete
-					</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
-	</div>
+    <el-table
+      class="Table"
+      ref="multipleTable"
+      :data="this.getSections"
+      stripe
+      style="width: 100%"
+    >
+      <el-table-column
+        type="selection"
+        width="50%"
+      />
+      <el-table-column
+        property="name"
+        label="Name"
+      />
+      <el-table-column
+        fixed="right"
+        label="Operations"
+        width="250"
+      >
+        <template slot-scope="scope">
+          <el-button
+            @click.native.prevent="viewSection(scope.$index, getSections)"
+            class="Table__view-button"
+            size="small"
+          >
+            View
+          </el-button>
+          <el-button
+            @click.native.prevent="showEditForm(scope.$index, getSections)"
+            class="Table__view-button"
+            size="small"
+          >
+            Update
+          </el-button>
+          <el-button
+            @click.native.prevent="deleteSection(scope.$index, getSections)"
+            class="Table__view-button"
+            size="small"
+          >
+            Delete
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
@@ -80,7 +89,6 @@
 		},
 		methods: {
 			showAddForm() {
-				console.log(this.getSections);
 				this.addFormVisible ? eventBus.$emit('addSectionFormVisible', false) : eventBus.$emit('addSectionFormVisible', true);
 				eventBus.$on('addSectionFormVisible', payload => {
 					this.addFormVisible = !payload;
