@@ -12,6 +12,7 @@
 
       <AddSectionForm />
       <EditSectionForm />
+
     </div>
 
     <el-table
@@ -44,6 +45,7 @@
           </el-button>
           <el-button
             @click.native.prevent="showEditForm(scope.$index, getSections)"
+
             class="Table__update-button"
             size="small"
           >
@@ -72,6 +74,7 @@
 	export default {
 		layout: 'Dashboard/DashboardLayout',
 		components: {AddSectionForm, EditSectionForm},
+
 		data() {
 			return {editFormVisible: this.showEditForm() || false};
 		},
