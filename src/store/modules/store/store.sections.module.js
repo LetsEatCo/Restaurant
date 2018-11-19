@@ -37,7 +37,7 @@ const actions = {
 			this.$axios.$post('/stores/me/sections', data)
 				.then(res => {
 					commit(STORE_CREATE_SECTION_REQUEST_SUCCESS);
-					dispatch(STORE_CREATE_SECTION_REQUEST);
+					dispatch(STORE_GET_SECTIONS_REQUEST);
 					resolve(res);
 				})
 				.catch(err => {
