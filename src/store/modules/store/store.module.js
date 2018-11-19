@@ -5,10 +5,6 @@ import {
 	STORE_PROFILE_REQUEST_SUCCESS,
 	STORE_EDIT_PROFILE_REQUEST, STORE_EDIT_PROFILE_REQUEST_SUCCESS, STORE_EDIT_PROFILE_REQUEST_ERROR
 } from '../../actions/store/store.actions';
-import {
-	STORE_CREATE_KIOSK_REQUEST_ERROR,
-	STORE_CREATE_KIOSK_REQUEST_SUCCESS
-} from "../../actions/store/store.kiosks.actions";
 
 const state = {
 	status: '',
@@ -23,25 +19,25 @@ const getters = {
 };
 
 const actions = {
-	[STORE_PROFILE_REQUEST]: function ({commit, dispatch}, jwt) {
+	[STORE_PROFILE_REQUEST]: function ({commit}, jwt) {
 		commit(STORE_PROFILE_REQUEST, jwt);
 		this.$axios.$get('/stores/me')
 			.then(res => {
 				commit(STORE_PROFILE_REQUEST_SUCCESS, res);
 				this.$router.push('/dashboard');
 			})
-			.catch(err => {
+			.catch(() => {
 				commit(STORE_PROFILE_REQUEST_ERROR);
 			});
 	},
-	[STORE_EDIT_PROFILE_REQUEST]: function({commit, dispatch}, data){
+	[STORE_EDIT_PROFILE_REQUEST]: function({commit}, data){
 
 		commit(STORE_EDIT_PROFILE_REQUEST);
 		this.$axios.$patch('/stores/me', data)
 			.then(res => {
 				commit(STORE_EDIT_PROFILE_REQUEST_SUCCESS, res);
 			})
-			.catch(err => {
+			.catch(() => {
 				commit(STORE_EDIT_PROFILE_REQUEST_ERROR);
 			});
 

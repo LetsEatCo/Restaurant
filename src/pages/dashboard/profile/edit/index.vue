@@ -1,7 +1,7 @@
 <template>
-	<div class="edit-profile-container">
-		<StoreProfileEditForm/>
-	</div>
+  <div class="edit-profile-container">
+    <StoreProfileEditForm />
+  </div>
 </template>
 
 <script>

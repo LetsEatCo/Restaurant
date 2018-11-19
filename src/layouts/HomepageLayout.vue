@@ -1,42 +1,55 @@
 <template>
-	<el-container>
-		<el-header height="auto" style="background-color: white;">
-			<div class="Header">
-				<div class="Header__left">
-					<img class="Header__left__logo"
-							 src="https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Logo--Black--no-fork.svg">
-				</div>
-				<div class="Header__right">
-					<nuxt-link v-if="!isAuthenticated" to="/login" class="Header__right__login">Login</nuxt-link>
-					<nuxt-link v-if="isAuthenticated" to="/dashboard" class="Header__right__login">Dashboard</nuxt-link>
-				</div>
-			</div>
-		</el-header>
-		<el-main>
-			<div class="Main">
-				<nuxt/>
-			</div>
-		</el-main>
-		<el-footer height="auto">
-			<div class="Footer">
-				<div class="Footer__top">
-					<p class="Footer__top__heading-text">Let's Eat is the largest, most reliable on-demand delivery and pickup
-						platform.</p>
-					<p class="Footer__top__sub-text">Able to deliver anything from anywhere, Let's Eat is the food delivery,
-						grocery delivery, whatever-you-can-think-of delivery service to bring what you crave right to your door.</p>
-				</div>
-				<div class="Footer__bottom">
-					<div class="Footer__bottom--column-1">
-						<img class="Footer__bottom--column-1__logo"
-								 src="https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Logo--White--no-fork.svg">
-					</div>
-					<div class="Footer__bottom--column-1">
-
-					</div>
-				</div>
-			</div>
-		</el-footer>
-	</el-container>
+  <el-container>
+    <el-header 
+      height="auto" 
+      style="background-color: white;"
+    >
+      <div class="Header">
+        <div class="Header__left">
+          <img 
+            class="Header__left__logo"
+            src="https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Logo--Black--no-fork.svg"
+          >
+        </div>
+        <div class="Header__right">
+          <nuxt-link 
+            v-if="!isAuthenticated" 
+            to="/login" 
+            class="Header__right__login"
+          >Login</nuxt-link>
+          <nuxt-link 
+            v-if="isAuthenticated" 
+            to="/dashboard" 
+            class="Header__right__login"
+          >Dashboard</nuxt-link>
+        </div>
+      </div>
+    </el-header>
+    <el-main>
+      <div class="Main">
+        <nuxt />
+      </div>
+    </el-main>
+    <el-footer height="auto">
+      <div class="Footer">
+        <div class="Footer__top">
+          <p class="Footer__top__heading-text">Let's Eat is the largest, most reliable on-demand delivery and pickup
+          platform.</p>
+          <p class="Footer__top__sub-text">Able to deliver anything from anywhere, Let's Eat is the food delivery,
+          grocery delivery, whatever-you-can-think-of delivery service to bring what you crave right to your door.</p>
+        </div>
+        <div class="Footer__bottom">
+          <div class="Footer__bottom--column-1">
+            <img 
+              class="Footer__bottom--column-1__logo"
+              src="https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Logo--White--no-fork.svg"
+            >
+          </div>
+          <div class="Footer__bottom--column-1" />
+        </div>
+      </div>
+    </el-footer>
+  </el-container>
 </template>
 
 <script>

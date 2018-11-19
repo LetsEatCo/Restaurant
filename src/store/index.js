@@ -27,7 +27,7 @@ const store = () => {
 			StoreSections,
 		},
 		actions: {
-			nuxtServerInit({commit}, {req, isClient, isServer, store, app: {$cookies, $axios}}) {
+			nuxtServerInit({commit}, {app: {$cookies, $axios}}) {
 				const cookies = $cookies.get('rootpersist');
 				if (cookies) {
 					commit(STORE_PROFILE_REQUEST, cookies.Store.jwt);

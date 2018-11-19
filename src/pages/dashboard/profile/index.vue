@@ -1,7 +1,7 @@
 <template>
-	<div>
-		<StoreProfile/>
-	</div>
+  <div>
+    <StoreProfile />
+  </div>
 </template>
 
 <script>
@@ -9,7 +9,7 @@
 	import StoreProfile from '../../../components/Dashboard/StoreProfile';
 
 	export default {
-		name: 'profile',
+		name: 'Profile',
 		layout: 'Dashboard/DashboardLayout',
 		components: {StoreProfile}
 	};

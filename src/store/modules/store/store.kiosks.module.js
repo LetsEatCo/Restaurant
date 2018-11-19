@@ -4,7 +4,6 @@ import {
 	STORE_CREATE_KIOSK_REQUEST_ERROR,
 	STORE_CREATE_KIOSK_REQUEST_SUCCESS,
 	STORE_GET_KIOSKS_REQUEST,
-	STORE_GET_KIOSKS_REQUEST_ERROR,
 	STORE_GET_KIOSKS_REQUEST_SUCCESS
 } from '../../actions/store/store.kiosks.actions';
 
@@ -18,14 +17,14 @@ const getters = {
 };
 
 const actions = {
-	[STORE_CREATE_KIOSK_REQUEST]: function ({commit, dispatch}, data) {
+	[STORE_CREATE_KIOSK_REQUEST]: function ({commit}, data) {
 		commit(STORE_CREATE_KIOSK_REQUEST);
 		this.$axios.setToken(JSON.parse(localStorage.getItem('store:persist')).storeModule.jwt, 'Bearer');
 		this.$axios.$post('/stores/me/kiosks', data)
 			.then(res => {
 				commit(STORE_CREATE_KIOSK_REQUEST_SUCCESS, res);
 			})
-			.catch(err => {
+			.catch(() => {
 				commit(STORE_CREATE_KIOSK_REQUEST_ERROR);
 			});
 	},
@@ -42,7 +41,7 @@ const actions = {
 };
 
 const mutations = {
-	[STORE_CREATE_KIOSK_REQUEST]: (state, jwt) => {
+	[STORE_CREATE_KIOSK_REQUEST]: (state) => {
 		state.status = 'loading';
 	},
 	[STORE_CREATE_KIOSK_REQUEST_SUCCESS]: (state, res) => {
