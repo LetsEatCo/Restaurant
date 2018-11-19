@@ -1,65 +1,73 @@
 <template>
-	<div>
-		<div class="Title">
-			<h1>Products</h1>
-		</div>
-		<div class="Actions">
-			<el-button class="Actions__add-button" size="medium" @click="showAddForm">Add</el-button>
-			<AddProductForm/>
-			<EditProductForm/>
-		</div>
-		<el-table
-			class="Table"
-			ref="multipleTable"
-			:data="this.getProducts"
-			stripe
-			style="width: 100%">
-			<el-table-column
-				type="selection"
-				width="50%">
-			</el-table-column>
-			<el-table-column
-				property="reference"
-				label="Reference">
-			</el-table-column>
-			<el-table-column
-				property="ean13"
-				label="EAN13">
-			</el-table-column>
-			<el-table-column
-				property="name"
-				label="Name">
-			</el-table-column>
-			<el-table-column
-				property="description"
-				label="Description">
-			</el-table-column>
-			<el-table-column
-				property="price"
-				label="Price (in €)">
-			</el-table-column>
-			<el-table-column
-				fixed="right"
-				label="Operations"
-				width="220">
+  <div>
+    <div class="Title">
+      <h1>Products</h1>
+    </div>
+    <div class="Actions">
+      <el-button 
+        class="Actions__add-button" 
+        size="medium" 
+        @click="showAddForm"
+      >Add</el-button>
+      <AddProductForm />
+      <EditProductForm />
+    </div>
+    <el-table
+      class="Table"
+      ref="multipleTable"
+      :data="this.getProducts"
+      stripe
+      style="width: 100%"
+    >
+      <el-table-column
+        type="selection"
+        width="50%"
+      />
+      <el-table-column
+        property="reference"
+        label="Reference"
+      />
+      <el-table-column
+        property="ean13"
+        label="EAN13"
+      />
+      <el-table-column
+        property="name"
+        label="Name"
+      />
+      <el-table-column
+        property="description"
+        label="Description"
+      />
+      <el-table-column
+        property="price"
+        label="Price (in €)"
+      />
+      <el-table-column
+        fixed="right"
+        label="Operations"
+        width="220"
+      >
 
-				<template slot-scope="scope">
-					<el-button
-						@click.native.prevent="showEditForm(scope.$index, getProducts)"
-						class="Table__delete-button"
-						size="small">
-						Update
-					</el-button>
-					<el-button
-						@click.native.prevent="deleteProduct(scope.$index, getProducts)"
-						class="Table__delete-button"
-						size="small">
-						Delete
-					</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
-	</div>
+        <template slot-scope="scope">
+          <el-button
+            @click.native.prevent="showEditForm(scope.$index, getProducts)"
+            class="Table__delete-button"
+            size="small"
+          >
+            Update
+          </el-button>
+          <el-button
+            @click.native.prevent="deleteProduct(scope.$index, getProducts)"
+            class="Table__delete-button"
+            size="small"
+          >
+            Delete
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>

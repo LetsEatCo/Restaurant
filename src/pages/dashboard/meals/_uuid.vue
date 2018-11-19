@@ -1,63 +1,69 @@
 <template>
-	<div>
-		<div class="Title">
-			<h1>{{meal.name}}</h1>
-		</div>
-		<div class="Informations">
-			<h2>Informations</h2>
-			<p>Name: {{meal.name}}</p>
-			<p>Reference: {{meal.reference}}</p>
-			<p>Price: {{meal.price}}€</p>
-			<p>Description: {{meal.description}}</p>
-		</div>
-		<div class="Subsections">
-			<h2>Subsections</h2>
-			<div class="Subsection" v-for="subsection of meal.subsections" :key="subsection.uuid">
-				<div class="Subsection__informations">
-					<p class="Subsection__informations__name">{{subsection.name}}</p>
-					<p>Is required ?: {{subsection.isRequired}}</p>
-					<p>Max selections: {{subsection.maxSelectionsPermitted}}</p>
-					<p>Min selections: {{subsection.minSelectionsPermitted}}</p>
-				</div>
-				<h4>Ingredients</h4>
-				<el-table
-					:data="subsection.options.ingredients"
-					style="width: 100%"
-					class="Table">
-					<el-table-column
-						prop="ingredient.name"
-						label="Name">
-					</el-table-column>
-					<el-table-column
-						prop="price"
-						label="Additional price">
-					</el-table-column>
-					<el-table-column
-						prop="quantity"
-						label="Quantity">
-					</el-table-column>
-				</el-table>
-				<h4>Products</h4>
-				<el-table
-					:data="subsection.options.products"
-					style="width: 100%"
-					class="Table">
-					<el-table-column
-						prop="product.name"
-						label="Name">
-					</el-table-column>
-					<el-table-column
-						prop="price"
-						label="Additional price">
-					</el-table-column>
-					<el-table-column
-						prop="quantity"
-						label="Quantity">
-					</el-table-column>
-				</el-table>
-			</div>
-		</div>
-	</div>
+  <div>
+    <div class="Title">
+      <h1>{{ meal.name }}</h1>
+    </div>
+    <div class="Informations">
+      <h2>Informations</h2>
+      <p>Name: {{ meal.name }}</p>
+      <p>Reference: {{ meal.reference }}</p>
+      <p>Price: {{ meal.price }}€</p>
+      <p>Description: {{ meal.description }}</p>
+    </div>
+    <div class="Subsections">
+      <h2>Subsections</h2>
+      <div 
+        class="Subsection" 
+        v-for="subsection of meal.subsections" 
+        :key="subsection.uuid"
+      >
+        <div class="Subsection__informations">
+          <p class="Subsection__informations__name">{{ subsection.name }}</p>
+          <p>Is required ?: {{ subsection.isRequired }}</p>
+          <p>Max selections: {{ subsection.maxSelectionsPermitted }}</p>
+          <p>Min selections: {{ subsection.minSelectionsPermitted }}</p>
+        </div>
+        <h4>Ingredients</h4>
+        <el-table
+          :data="subsection.options.ingredients"
+          style="width: 100%"
+          class="Table"
+        >
+          <el-table-column
+            prop="ingredient.name"
+            label="Name"
+          />
+          <el-table-column
+            prop="price"
+            label="Additional price"
+          />
+          <el-table-column
+            prop="quantity"
+            label="Quantity"
+          />
+        </el-table>
+        <h4>Products</h4>
+        <el-table
+          :data="subsection.options.products"
+          style="width: 100%"
+          class="Table"
+        >
+          <el-table-column
+            prop="product.name"
+            label="Name"
+          />
+          <el-table-column
+            prop="price"
+            label="Additional price"
+          />
+          <el-table-column
+            prop="quantity"
+            label="Quantity"
+          />
+        </el-table>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

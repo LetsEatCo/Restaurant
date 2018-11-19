@@ -1,34 +1,96 @@
 <template>
-	<div>
-		<h1>Become a partner</h1>
-		<el-form ref="form" :model="form" :rules="rules">
-			<el-form-item class="name-field" prop="name">
-				<el-input placeholder="Name" v-model="form.name" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item class="email-field" prop="email">
-				<el-input placeholder="Email" type="email" v-model="form.email" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item class="phone-field" prop="phoneNumber">
-				<el-input placeholder="Phone Number" v-model="form.phoneNumber" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item class="password-field" prop="password">
-				<el-input placeholder="Password" type="password" v-model="form.password" autocomplete="off"></el-input>
-			</el-form-item>
-			<el-form-item class="street-field" prop="street">
-				<el-input placeholder="Street" v-model="form.street" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item class="city-field" prop="city">
-				<el-input placeholder="City" v-model="form.city" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item class="zip-code-field" prop="zipCode">
-				<el-input placeholder="Zip code" v-model="form.zipCode" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item class="country-field" prop="country">
-				<el-input placeholder="Country" v-model="form.country" autocomplete="off"></el-input>
-			</el-form-item>
-			<el-button @click="register('form')">Register</el-button>
-		</el-form>
-	</div>
+  <div>
+    <h1>Become a partner</h1>
+    <el-form 
+      ref="form" 
+      :model="form" 
+      :rules="rules"
+    >
+      <el-form-item 
+        class="name-field" 
+        prop="name"
+      >
+        <el-input 
+          placeholder="Name" 
+          v-model="form.name" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        class="email-field" 
+        prop="email"
+      >
+        <el-input 
+          placeholder="Email" 
+          type="email" 
+          v-model="form.email" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        class="phone-field" 
+        prop="phoneNumber"
+      >
+        <el-input 
+          placeholder="Phone Number" 
+          v-model="form.phoneNumber" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        class="password-field" 
+        prop="password"
+      >
+        <el-input 
+          placeholder="Password" 
+          type="password" 
+          v-model="form.password" 
+          autocomplete="off"
+        />
+      </el-form-item>
+      <el-form-item 
+        class="street-field" 
+        prop="street"
+      >
+        <el-input 
+          placeholder="Street" 
+          v-model="form.street" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        class="city-field" 
+        prop="city"
+      >
+        <el-input 
+          placeholder="City" 
+          v-model="form.city" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        class="zip-code-field" 
+        prop="zipCode"
+      >
+        <el-input 
+          placeholder="Zip code" 
+          v-model="form.zipCode" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        class="country-field" 
+        prop="country"
+      >
+        <el-input 
+          placeholder="Country" 
+          v-model="form.country" 
+          autocomplete="off"
+        />
+      </el-form-item>
+      <el-button @click="register('form')">Register</el-button>
+    </el-form>
+  </div>
 </template>
 
 <script>

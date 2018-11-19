@@ -1,128 +1,238 @@
 <template>
-	<el-dialog title="Add Meal" custom-class="Actions__add-dialog" :visible.sync="formVisible" top="10vh"
-						 width="35%" @close="closeForm()">
-		<el-form label-position="top" ref="form" :model="form" :rules="rules">
-			<div class="Actions__add-dialog__tabs">
-				<p @click="handleTabSwitch(1)">Informations</p>
-				<p @click="handleTabSwitch(2)">Subsections</p>
-				<el-button v-if="subsectionsTabVisible" size="medium" @click="addSubsection">Add Subsection</el-button>
-			</div>
-			<div :style="{display: informationsTabVisible ? 'block' : 'none'}">
-				<el-form-item label="Reference" prop="reference">
-					<el-input placeholder="Product Reference" v-model="form.reference"
-										autocomplete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="Meal Name" prop="name">
-					<el-input placeholder="Eg. Menu Burger, Sushi Rolls for 4..." v-model="form.name"
-										autocomplete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="Price" prop="price">
-					<el-input-number :precision="2" :step="0.01" :min="0" placeholder="In €" v-model="form.price"
-													 autocomplete="off"></el-input-number>
-				</el-form-item>
-				<el-form-item label="Description">
-					<el-input type="textarea" v-model="form.description" autocomplete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="Product" prop="product">
-					<el-select v-model="form.productUuid" placeholder="Select"
-										 @change="handleProductSelectChange(form.productUuid)">
-						<el-option
-							v-for="product in getProducts"
-							:key="product.uuid"
-							:label="product.name"
-							:value="product.uuid">
-						</el-option>
-					</el-select>
-				</el-form-item>
-			</div>
-			<div  :style="{display: subsectionsTabVisible ? 'block' : 'none'}">
-				<div v-for="(subsection, index) in form.subsections" :key="index" class="Actions__add-dialog__subsection"
-						 :prop="subsection">
-					<div class="Actions__add-dialog__subsection__header">
-						<p class="Actions__add-dialog__subsection__header__title">Subsection {{index+1}}</p>
-						<el-button type="text" size="medium" class="Actions__add-dialog__subsection__header__button"
-											 @click.prevent="removeSubsection(subsection)">
-							Delete
-						</el-button>
-					</div>
-					<div class="Actions__add-dialog__subsection__actions">
-						<el-button type="text" size="medium" class="Actions__add-dialog__subsection__header__button"
-											 @click="addSubsectionIngredientForm(index)">Add Ingredient
-						</el-button>
-						<el-button type="text" size="medium" class="Actions__add-dialog__subsection__header__button"
-											 @click="addSubsectionProductForm(index)">Add Product
-						</el-button>
-					</div>
-					<el-form-item label="Name" prop="subsection">
-						<el-input v-model="subsection.name"></el-input>
-					</el-form-item>
-					<div class="Actions__add-dialog__subsection__input-number">
-						<div class="Actions__add-dialog__subsection__input-number-group">
-							<p>Min selections</p>
-							<el-input-number label="Min selections" v-model="subsection.minSelectionsPermitted" :min="0"
-															 :max="100"></el-input-number>
-						</div>
-						<div class="Actions__add-dialog__subsection__input-number-group">
-							<p>Max selections</p>
-							<el-input-number label="Max selections" v-model="subsection.maxSelectionsPermitted" :min="0"
-															 :max="100"></el-input-number>
-						</div>
-						<el-checkbox v-model="subsection.isRequired">Is Required ?</el-checkbox>
-					</div>
-					<el-form-item label="Ingredient" v-for="(optionIngredient, index) in subsection.options.ingredients"
-												:key="index">
-						<el-select v-model="optionIngredient.ingredientUuid" placeholder="Select">
-							<el-option
-								v-for="ingredient in getIngredients"
-								:key="ingredient.uuid"
-								:label="ingredient.name"
-								:value="ingredient.uuid">
-							</el-option>
-						</el-select>
-						<div class="Actions__add-dialog__subsection__input-number">
-							<div class="Actions__add-dialog__subsection__input-number-group">
-								<p>Extra Price</p>
-								<el-input-number v-model="optionIngredient.price" :precision="2" :step="0.01" :min="0"
-																 :max="100"></el-input-number>
-							</div>
-							<div class="Actions__add-dialog__subsection__input-number-group">
-								<p>Quantity</p>
-								<el-input-number v-model="optionIngredient.quantity" :min="1" :max="100"></el-input-number>
-							</div>
-						</div>
-					</el-form-item>
-					<el-form-item label="Product" v-for="(optionProduct, index) in subsection.options.products"
-												:key="index">
-						<el-select v-model="optionProduct.productUuid" placeholder="Select">
-							<el-option
-								v-for="product in getProducts"
-								:key="product.uuid"
-								:label="product.name"
-								:value="product.uuid">
-							</el-option>
-						</el-select>
-						<div class="Actions__add-dialog__subsection__input-number">
-							<div class="Actions__add-dialog__subsection__input-number-group">
-								<p>Extra Price</p>
-								<el-input-number v-model="optionProduct.price" :precision="2" :step="0.01" :min="0"
-																 :max="100"></el-input-number>
-							</div>
-							<div class="Actions__add-dialog__subsection__input-number-group">
-								<p>Quantity</p>
-								<el-input-number v-model="optionProduct.quantity" :min="1" :max="100"></el-input-number>
-							</div>
-						</div>
-					</el-form-item>
-				</div>
-			</div>
-		</el-form>
-		<div slot="footer">
-			<el-button class="cancel-button"
-								 @click="formVisible = false">Cancel
-			</el-button>
-			<el-button class="add-button" @click="addMeal('form')">Add Meal</el-button>
-		</div>
-	</el-dialog>
+  <el-dialog
+    title="Add Meal"
+    custom-class="Actions__add-dialog"
+    :visible.sync="formVisible"
+    top="10vh"
+    width="35%"
+    @close="closeForm()"
+  >
+    <el-form
+      label-position="top"
+      ref="form"
+      :model="form"
+      :rules="rules"
+    >
+      <div class="Actions__add-dialog__tabs">
+        <p @click="handleTabSwitch(1)">Informations</p>
+        <p @click="handleTabSwitch(2)">Subsections</p>
+        <el-button
+          v-if="subsectionsTabVisible"
+          size="medium"
+          @click="addSubsection"
+        >
+          Add Subsection
+        </el-button>
+      </div>
+      <div :style="{display: informationsTabVisible ? 'block' : 'none'}">
+        <el-form-item
+          label="Reference"
+          prop="reference"
+        >
+          <el-input
+            placeholder="Product Reference"
+            v-model="form.reference"
+            autocomplete="off"
+          />
+        </el-form-item>
+        <el-form-item
+          label="Meal Name"
+          prop="name"
+        >
+          <el-input
+            placeholder="Eg. Menu Burger, Sushi Rolls for 4..."
+            v-model="form.name"
+            autocomplete="off"
+          />
+        </el-form-item>
+        <el-form-item
+          label="Price"
+          prop="price"
+        >
+          <el-input-number
+            :precision="2"
+            :step="0.01"
+            :min="0"
+            placeholder="In €"
+            v-model="form.price"
+            autocomplete="off"
+          />
+        </el-form-item>
+        <el-form-item label="Description">
+          <el-input
+            type="textarea"
+            v-model="form.description"
+            autocomplete="off"
+          />
+        </el-form-item>
+        <el-form-item
+          label="Product"
+          prop="product"
+        >
+          <el-select
+            v-model="form.productUuid"
+            placeholder="Select"
+            @change="handleProductSelectChange(form.productUuid)"
+          >
+            <el-option
+              v-for="product in getProducts"
+              :key="product.uuid"
+              :label="product.name"
+              :value="product.uuid"
+            />
+          </el-select>
+        </el-form-item>
+      </div>
+      <div :style="{display: subsectionsTabVisible ? 'block' : 'none'}">
+        <div
+          v-for="(subsection, index) in form.subsections"
+          :key="index"
+          class="Actions__add-dialog__subsection"
+          :prop="subsection"
+        >
+          <div class="Actions__add-dialog__subsection__header">
+            <p class="Actions__add-dialog__subsection__header__title">Subsection {{ index+1 }}</p>
+            <el-button
+              type="text"
+              size="medium"
+              class="Actions__add-dialog__subsection__header__button"
+              @click.prevent="removeSubsection(subsection)"
+            >
+              Delete
+            </el-button>
+          </div>
+          <div class="Actions__add-dialog__subsection__actions">
+            <el-button
+              type="text"
+              size="medium"
+              class="Actions__add-dialog__subsection__header__button"
+              @click="addSubsectionIngredientForm(index)"
+            >Add Ingredient
+            </el-button>
+            <el-button
+              type="text"
+              size="medium"
+              class="Actions__add-dialog__subsection__header__button"
+              @click="addSubsectionProductForm(index)"
+            >Add Product
+            </el-button>
+          </div>
+          <el-form-item
+            label="Name"
+            prop="subsection"
+          >
+            <el-input v-model="subsection.name" />
+          </el-form-item>
+          <div class="Actions__add-dialog__subsection__input-number">
+            <div class="Actions__add-dialog__subsection__input-number-group">
+              <p>Min selections</p>
+              <el-input-number
+                label="Min selections"
+                v-model="subsection.minSelectionsPermitted"
+                :min="0"
+                :max="100"
+              />
+            </div>
+            <div class="Actions__add-dialog__subsection__input-number-group">
+              <p>Max selections</p>
+              <el-input-number
+                label="Max selections"
+                v-model="subsection.maxSelectionsPermitted"
+                :min="0"
+                :max="100"
+              />
+            </div>
+            <el-checkbox v-model="subsection.isRequired">Is Required ?</el-checkbox>
+          </div>
+          <el-form-item
+            label="Ingredient"
+            v-for="(optionIngredient, ingredientIndex) in subsection.options.ingredients"
+            :key="ingredientIndex"
+          >
+            <el-select
+              v-model="optionIngredient.ingredientUuid"
+              placeholder="Select"
+            >
+              <el-option
+                v-for="ingredient in getIngredients"
+                :key="ingredient.uuid"
+                :label="ingredient.name"
+                :value="ingredient.uuid"
+              />
+            </el-select>
+            <div class="Actions__add-dialog__subsection__input-number">
+              <div class="Actions__add-dialog__subsection__input-number-group">
+                <p>Extra Price</p>
+                <el-input-number
+                  v-model="optionIngredient.price"
+                  :precision="2"
+                  :step="0.01"
+                  :min="0"
+                  :max="100"
+                />
+              </div>
+              <div class="Actions__add-dialog__subsection__input-number-group">
+                <p>Quantity</p>
+                <el-input-number
+                  v-model="optionIngredient.quantity"
+                  :min="1"
+                  :max="100"
+                />
+              </div>
+            </div>
+          </el-form-item>
+          <el-form-item
+            label="Product"
+            v-for="(optionProduct, index) in subsection.options.products"
+            :key="index"
+          >
+            <el-select
+              v-model="optionProduct.productUuid"
+              placeholder="Select"
+            >
+              <el-option
+                v-for="product in getProducts"
+                :key="product.uuid"
+                :label="product.name"
+                :value="product.uuid"
+              />
+            </el-select>
+            <div class="Actions__add-dialog__subsection__input-number">
+              <div class="Actions__add-dialog__subsection__input-number-group">
+                <p>Extra Price</p>
+                <el-input-number
+                  v-model="optionProduct.price"
+                  :precision="2"
+                  :step="0.01"
+                  :min="0"
+                  :max="100"
+                />
+              </div>
+              <div class="Actions__add-dialog__subsection__input-number-group">
+                <p>Quantity</p>
+                <el-input-number
+                  v-model="optionProduct.quantity"
+                  :min="1"
+                  :max="100"
+                />
+              </div>
+            </div>
+          </el-form-item>
+        </div>
+      </div>
+    </el-form>
+    <div slot="footer">
+      <el-button
+        class="cancel-button"
+        @click="formVisible = false"
+      >Cancel
+      </el-button>
+      <el-button
+        class="add-button"
+        @click="addMeal('form')"
+      >Add Meal</el-button>
+    </div>
+  </el-dialog>
 </template>
 
 <script>

@@ -1,31 +1,66 @@
 <template>
-	<div class="edit-infos-container">
-		<h1>Edit your Store: </h1>
-		<el-form ref="form" :model="form" label-width="120px">
-			<el-form-item label="Name" >
-				<el-input v-model="form.name"></el-input>
-			</el-form-item><el-form-item label="Email" >
-				<el-input v-model="form.email"></el-input>
-			</el-form-item><el-form-item label="Phone number">
-				<el-input v-model="form.phoneNumber"></el-input>
-			</el-form-item>
-			<el-form-item label="Street" class="street-field" prop="street">
-				<el-input v-model="form.street" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item label="City" class="city-field" prop="city">
-				<el-input v-model="form.city" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item label="Zip code" class="zip-code-field" prop="zipCode">
-				<el-input v-model="form.zipCode" autocomplete="on"></el-input>
-			</el-form-item>
-			<el-form-item label="Country" class="country-field" prop="country">
-				<el-input v-model="form.country" autocomplete="off"></el-input>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="primary" @click="updateProfile">Update</el-button>
-			</el-form-item>
-		</el-form>
-	</div>
+  <div class="edit-infos-container">
+    <h1>Edit your Store: </h1>
+    <el-form 
+      ref="form" 
+      :model="form" 
+      label-width="120px"
+    >
+      <el-form-item label="Name">
+        <el-input v-model="form.name" />
+      </el-form-item><el-form-item label="Email">
+        <el-input v-model="form.email" />
+      </el-form-item><el-form-item label="Phone number">
+        <el-input v-model="form.phoneNumber" />
+      </el-form-item>
+      <el-form-item 
+        label="Street" 
+        class="street-field" 
+        prop="street"
+      >
+        <el-input 
+          v-model="form.street" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        label="City" 
+        class="city-field" 
+        prop="city"
+      >
+        <el-input 
+          v-model="form.city" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        label="Zip code" 
+        class="zip-code-field" 
+        prop="zipCode"
+      >
+        <el-input 
+          v-model="form.zipCode" 
+          autocomplete="on"
+        />
+      </el-form-item>
+      <el-form-item 
+        label="Country" 
+        class="country-field" 
+        prop="country"
+      >
+        <el-input 
+          v-model="form.country" 
+          autocomplete="off"
+        />
+      </el-form-item>
+      <el-form-item>
+        <el-button 
+          type="primary" 
+          @click="updateProfile"
+        >Update</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 
 </template>
 

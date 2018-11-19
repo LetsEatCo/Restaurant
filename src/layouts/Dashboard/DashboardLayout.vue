@@ -1,14 +1,17 @@
 <template>
-	<div class="app-wrapper">
-		<Sidebar class="sidebar-container"/>
-		<el-container>
-			<el-col :span="24" class="main-container">
-				<no-ssr>
-					<nuxt/>
-				</no-ssr>
-			</el-col>
-		</el-container>
-	</div>
+  <div class="app-wrapper">
+    <Sidebar class="sidebar-container" />
+    <el-container>
+      <el-col 
+        :span="24" 
+        class="main-container"
+      >
+        <no-ssr>
+          <nuxt />
+        </no-ssr>
+      </el-col>
+    </el-container>
+  </div>
 </template>
 
 <script>

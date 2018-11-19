@@ -5,10 +5,6 @@ import {
 	STORE_PROFILE_REQUEST_SUCCESS,
 	STORE_EDIT_PROFILE_REQUEST, STORE_EDIT_PROFILE_REQUEST_SUCCESS, STORE_EDIT_PROFILE_REQUEST_ERROR
 } from '../../actions/store/store.actions';
-import {
-	STORE_CREATE_KIOSK_REQUEST_ERROR,
-	STORE_CREATE_KIOSK_REQUEST_SUCCESS
-} from "../../actions/store/store.kiosks.actions";
 
 const state = {
 	status: '',

@@ -1,13 +1,27 @@
 <template>
-	<el-form ref="form" :model="form" :class="$mq">
-		<el-form-item class="email-field">
-			<el-input placeholder="Email" type="email" v-model="form.email" autocomplete="on"></el-input>
-		</el-form-item>
-		<el-form-item class="password-field">
-			<el-input placeholder="Password" type="password" v-model="form.password" autocomplete="off"></el-input>
-		</el-form-item>
-		<el-button @click="login">Login</el-button>
-	</el-form>
+  <el-form 
+    ref="form" 
+    :model="form" 
+    :class="$mq"
+  >
+    <el-form-item class="email-field">
+      <el-input 
+        placeholder="Email" 
+        type="email" 
+        v-model="form.email" 
+        autocomplete="on"
+      />
+    </el-form-item>
+    <el-form-item class="password-field">
+      <el-input 
+        placeholder="Password" 
+        type="password" 
+        v-model="form.password" 
+        autocomplete="off"
+      />
+    </el-form-item>
+    <el-button @click="login">Login</el-button>
+  </el-form>
 </template>
 
 <style lang="scss" scoped>

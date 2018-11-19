@@ -1,4 +1,4 @@
-export default function ({store, redirect, route, app}) {
+export default function ({redirect, route, app}) {
 	if (process.server && route.name) {
 		const cookies = app.$cookies.get('rootpersist');
 		if (route.name === 'dashboard-login' && cookies && cookies.Store.jwt) {

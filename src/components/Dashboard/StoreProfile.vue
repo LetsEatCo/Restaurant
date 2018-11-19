@@ -1,11 +1,11 @@
 <template>
-	<div class="infos-container">
-		<ul>
-			<li>Name : {{getProfile.name}}</li>
-			<li>Email : {{getProfile.email}}</li>
-			<li>Phone-number : {{getProfile.phoneNumber}}</li>
-		</ul>
-	</div>
+  <div class="infos-container">
+    <ul>
+      <li>Name : {{ getProfile.name }}</li>
+      <li>Email : {{ getProfile.email }}</li>
+      <li>Phone-number : {{ getProfile.phoneNumber }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>

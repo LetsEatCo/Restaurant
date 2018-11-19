@@ -1,20 +1,29 @@
 <template>
-	<el-container>
-		<el-main>
-			<el-row>
-				<el-col :span="this.responsiveLoginCol" class="Login-Form">
-					<LoginForm/>
-				</el-col>
-				<el-col :span="this.responsiveMediaCol" class="Login-Media">
-					<mq-layout class="Login-Media__logo" mq='md+'>
-						<img src="https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Logo--White.svg">
-						<p>For Restaurants</p>
-					</mq-layout>
-					<div class="Login-Media__overlay"></div>
-				</el-col>
-			</el-row>
-		</el-main>
-	</el-container>
+  <el-container>
+    <el-main>
+      <el-row>
+        <el-col 
+          :span="this.responsiveLoginCol" 
+          class="Login-Form"
+        >
+          <LoginForm />
+        </el-col>
+        <el-col 
+          :span="this.responsiveMediaCol" 
+          class="Login-Media"
+        >
+          <mq-layout 
+            class="Login-Media__logo" 
+            mq='md+'
+          >
+            <img src="https://s3.eu-west-3.amazonaws.com/lets-eat-co/assets/Logo--White.svg">
+            <p>For Restaurants</p>
+          </mq-layout>
+          <div class="Login-Media__overlay" />
+        </el-col>
+      </el-row>
+    </el-main>
+  </el-container>
 </template>
 <style lang="scss" scoped>
 	.el-container {
