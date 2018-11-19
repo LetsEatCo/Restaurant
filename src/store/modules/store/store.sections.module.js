@@ -47,7 +47,7 @@ const actions = {
 				});
 		});
 	},
-	[STORE_GET_SECTIONS_REQUEST] : function({commit}){
+	[STORE_GET_SECTIONS_REQUEST]: function ({commit}) {
 
 		commit(STORE_GET_SECTIONS_REQUEST);
 		return new Promise((resolve, reject) => {

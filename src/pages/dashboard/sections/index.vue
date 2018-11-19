@@ -58,9 +58,11 @@
 	import {
 		STORE_GET_MEALS_REQUEST,
 		STORE_GET_MEALS_REQUEST_SUCCESS,
-		STORE_DELETE_MEAL_REQUEST
 	} from '../../../store/actions/store/store.meals.actions';
-	import {STORE_GET_SECTIONS_REQUEST, STORE_DELETE_SECTION_REQUEST} from '../../../store/actions/store/store.sections.actions';
+	import {
+		STORE_GET_SECTIONS_REQUEST,
+		STORE_DELETE_SECTION_REQUEST
+	} from '../../../store/actions/store/store.sections.actions';
 	import AddSectionForm from '../../../components/Dashboard/Sections/AddSectionForm';
 	import {
 		STORE_GET_PRODUCTS_REQUEST,
@@ -69,7 +71,7 @@
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
-		components: {AddSectionForm },
+		components: {AddSectionForm},
 		data() {
 			return {editFormVisible: this.showEditForm() || false};
 		},
@@ -87,7 +89,7 @@
 			viewSection(index, sections) {
 				this.$router.push(`/dashboard/meals/${sections[index].uuid}`);
 			},
-			deleteSection(index, sections){
+			deleteSection(index, sections) {
 				return this.$store.dispatch(STORE_DELETE_SECTION_REQUEST, sections[index].uuid);
 			},
 			showEditForm(index, meals) {
