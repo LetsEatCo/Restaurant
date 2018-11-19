@@ -63,6 +63,24 @@ const actions = {
 				});
 		});
 	},
+	[STORE_UPDATE_SECTION_REQUEST]: function ({commit, dispatch}, data) {
+		const {uuid, ...values} = data;
+		commit(STORE_UPDATE_SECTION_REQUEST);
+		return new Promise((resolve, reject) => {
+			this.$axios.setToken(this.$cookies.get('rootpersist').Store.jwt
+				|| this.app.store.getters.getToken, 'Bearer');
+			this.$axios.$patch(`/stores/me/sections/${uuid}`, values)
+				.then(res => {
+					commit(STORE_UPDATE_SECTION_REQUEST_SUCCESS);
+					dispatch(STORE_GET_SECTIONS_REQUEST);
+					resolve(res);
+				})
+				.catch(err => {
+					commit(STORE_UPDATE_SECTION_REQUEST_ERROR);
+					reject(err);
+				});
+		});
+	}
 
 };
 

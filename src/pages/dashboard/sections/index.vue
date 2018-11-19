@@ -7,6 +7,7 @@
 			<el-button class="Actions__add-button" size="medium" @click="showAddForm">Add</el-button>
 
 			<AddSectionForm/>
+			<EditSectionForm/>
 		</div>
 
 		<el-table
@@ -36,7 +37,7 @@
 					</el-button>
 					<el-button
 						@click.native.prevent="showEditForm(scope.$index, getSections)"
-						class="Table__view-button"
+						class="Table__update-button"
 						size="small">
 						Update
 					</el-button>
@@ -57,10 +58,11 @@
 	import eventBus from '../../../utils/event-bus';
 	import {STORE_GET_SECTIONS_REQUEST, STORE_DELETE_SECTION_REQUEST} from '../../../store/actions/store/store.sections.actions';
 	import AddSectionForm from '../../../components/Dashboard/Sections/AddSectionForm';
+	import EditSectionForm from '../../../components/Dashboard/Sections/EditSectionForm';
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
-		components: {AddSectionForm },
+		components: {AddSectionForm, EditSectionForm},
 		data() {
 			return {editFormVisible: this.showEditForm() || false};
 		},
@@ -69,7 +71,6 @@
 		},
 		methods: {
 			showAddForm() {
-				console.log(this.getSections);
 				this.addFormVisible ? eventBus.$emit('addSectionFormVisible', false) : eventBus.$emit('addSectionFormVisible', true);
 				eventBus.$on('addSectionFormVisible', payload => {
 					this.addFormVisible = !payload;
@@ -81,25 +82,21 @@
 			deleteSection(index, sections){
 				return this.$store.dispatch(STORE_DELETE_SECTION_REQUEST, sections[index].uuid);
 			},
-			showEditForm(index, meals) {
+			showEditForm(index, sections) {
+
 				let data = {};
-				if (meals) {
+				if (sections) {
 
 					data = {
-						uuid: meals[index].uuid,
-						reference: meals[index].reference,
-						name: meals[index].name,
-						description: meals[index].description,
-						price: meals[index].price,
-						productQuantity: meals[index].productQuantity,
-						subsections: meals[index].subsections
+						uuid: sections[index].uuid,
+						name: sections[index].name,
 					};
 				}
 				this.editFormVisible
-					? eventBus.$emit('editMealFormVisible', {data: data || null, visible: false})
-					: eventBus.$emit('editMealFormVisible', {data: data || null, visible: true});
+					? eventBus.$emit('editSectionFormVisible', {data: data || null, visible: false})
+					: eventBus.$emit('editSectionFormVisible', {data: data || null, visible: true});
 
-				eventBus.$on('editMealFormVisible', payload => {
+				eventBus.$on('editSectionFormVisible', payload => {
 					this.editFormVisible = !payload.visible;
 				});
 			}
