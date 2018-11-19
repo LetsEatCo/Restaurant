@@ -1,45 +1,45 @@
 <template>
-	<el-dialog
-		title="Edit Meal"
-		custom-class="Actions__edit-dialog"
-		:visible.sync="formVisible"
-		top="10vh"
-		width="35%"
-		@close="closeForm()"
-	>
-		<el-form
-			label-position="top"
-			ref="form"
-			:model="form"
-			:rules="rules"
-		>
-			<div :style="{display: 'block'}">
+  <el-dialog
+    title="Edit Meal"
+    custom-class="Actions__edit-dialog"
+    :visible.sync="formVisible"
+    top="10vh"
+    width="35%"
+    @close="closeForm()"
+  >
+    <el-form
+      label-position="top"
+      ref="form"
+      :model="form"
+      :rules="rules"
+    >
+      <div :style="{display: 'block'}">
 
-				<el-form-item
-					label="Section Name"
-					prop="name"
-				>
-					<el-input
-						placeholder="Eg. Menu Burger, Sushi Rolls for 4..."
-						v-model="form.name"
-						autocomplete="off"
-					/>
-				</el-form-item>
+        <el-form-item
+          label="Section Name"
+          prop="name"
+        >
+          <el-input
+            placeholder="Eg. Menu Burger, Sushi Rolls for 4..."
+            v-model="form.name"
+            autocomplete="off"
+          />
+        </el-form-item>
 
-			</div>
-		</el-form>
-		<div slot="footer">
-			<el-button
-				class="cancel-button"
-				@click="formVisible = false"
-			>Cancel
-			</el-button>
-			<el-button
-				class="add-button"
-				@click="updateSection('form')"
-			>Edit Section</el-button>
-		</div>
-	</el-dialog>
+      </div>
+    </el-form>
+    <div slot="footer">
+      <el-button
+        class="cancel-button"
+        @click="formVisible = false"
+      >Cancel
+      </el-button>
+      <el-button
+        class="add-button"
+        @click="updateSection('form')"
+      >Edit Section</el-button>
+    </div>
+  </el-dialog>
 </template>
 
 <script>
