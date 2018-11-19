@@ -183,8 +183,8 @@
           </el-form-item>
           <el-form-item
             label="Product"
-            v-for="(optionProduct, index) in subsection.options.products"
-            :key="index"
+            v-for="(optionProduct, optionProductIndex) in subsection.options.products"
+            :key="optionProductIndex"
           >
             <el-select
               v-model="optionProduct.productUuid"
@@ -240,7 +240,6 @@
 	import {mapGetters} from 'vuex';
 	import {quantityRange} from '../../../utils/quantity-range';
 	import {STORE_CREATE_MEAL_REQUEST} from '../../../store/actions/store/store.meals.actions';
-	// import traverse from 'traverse';
 
 	export default {
 		name: 'AddMealForm',

@@ -239,18 +239,17 @@
 	import {mapGetters} from 'vuex';
 	import {quantityRange} from '../../../utils/quantity-range';
 	import {STORE_UPDATE_MEAL_REQUEST} from '../../../store/actions/store/store.meals.actions';
-	// import traverse from 'traverse';
 
 	export default {
 		name: 'EditMealForm',
 		data() {
-			const validateProduct = (rule, value, callback) => {
-				if (value === '') {
-					callback(new Error('Please select a Product'));
-				} else {
-					callback();
-				}
-			};
+			// const validateProduct = (rule, value, callback) => {
+			// 	if (value === '') {
+			// 		callback(new Error('Please select a Product'));
+			// 	} else {
+			// 		callback();
+			// 	}
+			// };
 			return {
 				formVisible: this.showForm() || false,
 				informationsTabVisible: true,

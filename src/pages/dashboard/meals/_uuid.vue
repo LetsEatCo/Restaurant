@@ -12,9 +12,9 @@
     </div>
     <div class="Subsections">
       <h2>Subsections</h2>
-      <div 
-        class="Subsection" 
-        v-for="subsection of meal.subsections" 
+      <div
+        class="Subsection"
+        v-for="subsection of meal.subsections"
         :key="subsection.uuid"
       >
         <div class="Subsection__informations">
@@ -77,10 +77,6 @@
 		name: 'Meal',
 		data() {
 			return {};
-		},
-		validate({params}) {
-
-			return true;
 		},
 		async asyncData({store, params}) {
 			const meals = await store.dispatch(STORE_GET_MEALS_REQUEST);
