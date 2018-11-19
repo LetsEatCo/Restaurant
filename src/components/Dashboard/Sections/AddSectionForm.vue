@@ -1,48 +1,84 @@
 <template>
-	<el-dialog title="Add Section" custom-class="Actions__add-dialog" :visible.sync="formVisible" top="10vh"
-						 width="35%" @close="closeForm()">
-		<el-form label-position="top" ref="form" :model="form" :rules="rules">
-			<div :style="{display: 'block'}">
-				<el-form-item label="Section Name" prop="name">
-					<el-input placeholder="Our Burgers, Desserts..." v-model="form.name"
-										autocomplete="off"></el-input>
-				</el-form-item>
+  <el-dialog
+    title="Add Section"
+    custom-class="Actions__add-dialog"
+    :visible.sync="formVisible"
+    top="10vh"
+    width="35%"
+    @close="closeForm()"
+  >
+    <el-form
+      label-position="top"
+      ref="form"
+      :model="form"
+      :rules="rules"
+    >
+      <div :style="{display: 'block'}">
+        <el-form-item
+          label="Section Name"
+          prop="name"
+        >
+          <el-input
+            placeholder="Our Burgers, Desserts..."
+            v-model="form.name"
+            autocomplete="off"
+          />
+        </el-form-item>
 
-				<el-form-item label="Meals">
-					<el-cascader multiple placeholder="Meals"
-											 :options="optionMeals()" @change="addSectionMeal">
-					</el-cascader>
-				</el-form-item>
+        <el-form-item label="Meals">
+          <el-cascader
+            multiple
+            placeholder="Meals"
+            :options="optionMeals()"
+            @change="addSectionMeal"
+          />
+        </el-form-item>
 
-				<el-form-item>
-					<el-tag :key="meal.uuid" v-for="meal in form.meals" closable
-									@close="handleTagMealClose(meal)">
-						{{getMealByUuid(meal.uuid).name}}
-					</el-tag>
-				</el-form-item>
+        <el-form-item>
+          <el-tag
+            :key="meal.uuid"
+            v-for="meal in form.meals"
+            closable
+            @close="handleTagMealClose(meal)"
+          >
+            {{ getMealByUuid(meal.uuid).name }}
+          </el-tag>
+        </el-form-item>
 
-				<el-form-item label="Products">
-					<el-cascader multiple placeholder="Products"
-											 :options="optionProducts()" @change="addSectionProduct">
-					</el-cascader>
-				</el-form-item>
+        <el-form-item label="Products">
+          <el-cascader
+            multiple
+            placeholder="Products"
+            :options="optionProducts()"
+            @change="addSectionProduct"
+          />
+        </el-form-item>
 
-				<el-form-item>
-					<el-tag :key="product.uuid" v-for="product in form.products" closable
-									@close="handleTagProductClose(product)">
-						{{getProductByUuid(product.uuid).name}}
-					</el-tag>
-				</el-form-item>
+        <el-form-item>
+          <el-tag
+            :key="product.uuid"
+            v-for="product in form.products"
+            closable
+            @close="handleTagProductClose(product)"
+          >
+            {{ getProductByUuid(product.uuid).name }}
+          </el-tag>
+        </el-form-item>
 
-			</div>
-		</el-form>
-		<div slot="footer">
-			<el-button class="cancel-button"
-								 @click="formVisible = false">Cancel
-			</el-button>
-			<el-button class="add-button" @click="addSection('form')">Add Section</el-button>
-		</div>
-	</el-dialog>
+      </div>
+    </el-form>
+    <div slot="footer">
+      <el-button
+        class="cancel-button"
+        @click="formVisible = false"
+      >Cancel
+      </el-button>
+      <el-button
+        class="add-button"
+        @click="addSection('form')"
+      >Add Section</el-button>
+    </div>
+  </el-dialog>
 </template>
 
 <script>
