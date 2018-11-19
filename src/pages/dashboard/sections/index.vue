@@ -55,17 +55,8 @@
 <script>
 	import {mapGetters} from 'vuex';
 	import eventBus from '../../../utils/event-bus';
-	import {
-		STORE_GET_MEALS_REQUEST,
-		STORE_GET_MEALS_REQUEST_SUCCESS,
-		STORE_DELETE_MEAL_REQUEST
-	} from '../../../store/actions/store/store.meals.actions';
 	import {STORE_GET_SECTIONS_REQUEST, STORE_DELETE_SECTION_REQUEST} from '../../../store/actions/store/store.sections.actions';
 	import AddSectionForm from '../../../components/Dashboard/Sections/AddSectionForm';
-	import {
-		STORE_GET_PRODUCTS_REQUEST,
-		STORE_GET_PRODUCTS_REQUEST_SUCCESS
-	} from '../../../store/actions/store/store.products.actions';
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
@@ -114,12 +105,7 @@
 			}
 		},
 		async asyncData({store}) {
-			const meals = await store.dispatch(STORE_GET_MEALS_REQUEST);
-			const products = await store.dispatch(STORE_GET_PRODUCTS_REQUEST);
 			const sections = await store.dispatch(STORE_GET_SECTIONS_REQUEST);
-
-			store.commit(STORE_GET_MEALS_REQUEST_SUCCESS, meals);
-			store.commit(STORE_GET_PRODUCTS_REQUEST_SUCCESS, products);
 			store.commit(STORE_GET_SECTIONS_REQUEST, sections);
 		}
 	};

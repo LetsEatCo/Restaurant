@@ -34,7 +34,6 @@ const actions = {
 		commit(STORE_CREATE_SECTION_REQUEST);
 		return new Promise((resolve, reject) => {
 			this.$axios.setToken(this.app.store.getters.getToken, 'Bearer');
-			console.log(data);
 			this.$axios.$post('/stores/me/sections', data)
 				.then(res => {
 					commit(STORE_CREATE_SECTION_REQUEST_SUCCESS);
