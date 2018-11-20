@@ -12,6 +12,7 @@
 
       <AddSectionForm />
       <EditSectionForm />
+      <AddSectionProductForm />
 
     </div>
 
@@ -33,7 +34,7 @@
       <el-table-column
         fixed="right"
         label="Operations"
-        width="250"
+        width="350"
       >
         <template slot-scope="scope">
           <el-button
@@ -44,9 +45,17 @@
             View
           </el-button>
           <el-button
+            @click.native.prevent="showAddProductForm(scope.$index, getSections)"
+
+            class="Table__view-button"
+            size="small"
+          >
+            Add
+          </el-button>
+          <el-button
             @click.native.prevent="showEditForm(scope.$index, getSections)"
 
-            class="Table__update-button"
+            class="Table__view-button"
             size="small"
           >
             Update
@@ -70,10 +79,11 @@
 	import {STORE_GET_SECTIONS_REQUEST, STORE_DELETE_SECTION_REQUEST} from '../../../store/actions/store/store.sections.actions';
 	import AddSectionForm from '../../../components/Dashboard/Sections/AddSectionForm';
 	import EditSectionForm from '../../../components/Dashboard/Sections/EditSectionForm';
+	import AddSectionProductForm from '../../../components/Dashboard/Sections/AddSectionProductForm';
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
-		components: {AddSectionForm, EditSectionForm},
+		components: {AddSectionForm, EditSectionForm, AddSectionProductForm},
 
 		data() {
 			return {editFormVisible: this.showEditForm() || false};
@@ -86,6 +96,21 @@
 				this.addFormVisible ? eventBus.$emit('addSectionFormVisible', false) : eventBus.$emit('addSectionFormVisible', true);
 				eventBus.$on('addSectionFormVisible', payload => {
 					this.addFormVisible = !payload;
+				});
+			},
+			showAddProductForm(index, sections) {
+
+				let data = {};
+				if (sections) {
+
+					data = {
+						uuid: sections[index].uuid,
+					};
+				}
+
+				this.addFormVisible ? eventBus.$emit('addSectionProductFormVisible', {data: data || null, visible: false}) : eventBus.$emit('addSectionProductFormVisible', {data: data || null, visible: true});
+				eventBus.$on('addSectionProductFormVisible', payload => {
+					this.addFormVisible = !payload.visible;
 				});
 			},
 			viewSection(index, sections) {
