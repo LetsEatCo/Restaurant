@@ -49,7 +49,6 @@ const actions = {
 				});
 		});
 	},
-
 	[STORE_ADD_SECTION_PRODUCT_REQUEST]: function ({commit, dispatch}, data) {
 		commit(STORE_CREATE_SECTION_REQUEST);
 		return new Promise((resolve, reject) => {
@@ -68,7 +67,6 @@ const actions = {
 				});
 		});
 	},
-
 	[STORE_GET_SECTIONS_REQUEST]: function ({commit}) {
 
 		commit(STORE_GET_SECTIONS_REQUEST);
