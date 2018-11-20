@@ -70,7 +70,6 @@ const actions = {
 				});
 		});
 	},
-
 	[STORE_REMOVE_SECTION_PRODUCT_REQUEST]: function ({commit, dispatch}, data) {
 		commit(STORE_REMOVE_SECTION_PRODUCT_REQUEST);
 		return new Promise((resolve, reject) => {
