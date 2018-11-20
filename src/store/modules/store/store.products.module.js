@@ -20,7 +20,8 @@ const state = {
 };
 
 const getters = {
-	getProducts: state => state.products
+	getProducts: state => state.products,
+	getProductByUuid: (state) => uuid => state.products.find(product => product.uuid === uuid)
 };
 
 const actions = {

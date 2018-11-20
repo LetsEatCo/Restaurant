@@ -41,6 +41,12 @@ export default {
 					index: '6-2'
 				}
 			]
-		}
+		},
+		{
+			name:'Sections',
+			url:'/sections',
+			index:'7'
+
+		},
 	]
 };

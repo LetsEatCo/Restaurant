@@ -20,7 +20,8 @@
           v-if="subsectionsTabVisible"
           size="medium"
           @click="addSubsection"
-        >Add Subsection</el-button>
+        >Add Subsection
+        </el-button>
       </div>
       <div :style="{display: informationsTabVisible ? 'block' : 'none'}">
         <el-form-item
@@ -229,7 +230,8 @@
       <el-button
         class="add-button"
         @click="updateMeal('form')"
-      >Edit Meal</el-button>
+      >Edit Meal
+      </el-button>
     </div>
   </el-dialog>
 </template>
