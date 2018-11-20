@@ -47,7 +47,7 @@
           >
             <template slot-scope="scope">
               <el-button
-                @click.native.prevent="viewMeal(scope.$index, getMeals)"
+                @click.native.prevent="viewMeal(scope.$index, section.meals)"
                 class="Table__view-button"
                 size="small"
               >
@@ -55,7 +55,7 @@
               </el-button>
 
               <el-button
-                @click.native.prevent="removeProduct(scope.$index, getMeals)"
+                @click.native.prevent="removeMeal(scope.$index, section.meals)"
                 class="Table__view-button"
                 size="small"
               >
@@ -110,14 +110,14 @@
 
           <template slot-scope="scope">
             <el-button
-              @click.native.prevent="showEditForm(scope.$index, getProducts)"
+              @click.native.prevent="showEditForm(scope.$index, section.products)"
               class="Table__delete-button"
               size="small"
             >
               View
             </el-button>
             <el-button
-              @click.native.prevent="removeProduct(scope.$index, getProducts)"
+              @click.native.prevent="removeProduct(scope.$index, section.products)"
               class="Table__delete-button"
               size="small"
             >
@@ -134,7 +134,7 @@
 
 <script>
 
-	import {STORE_GET_SECTIONS_REQUEST, STORE_GET_SECTIONS_REQUEST_SUCCESS} from '../../../store/actions/store/store.sections.actions';
+	import {STORE_GET_SECTIONS_REQUEST, STORE_GET_SECTIONS_REQUEST_SUCCESS, STORE_REMOVE_SECTION_PRODUCT_REQUEST} from '../../../store/actions/store/store.sections.actions';
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
@@ -143,12 +143,29 @@
 			return {};
 		},
 		methods: {
-			viewMeal(){
+			viewMeal(index, meals){
+				this.$router.push(`/dashboard/meals/${meals[index].uuid}`);
+			},
+			removeProduct(index, products){
+
+				let data = {
+					uuid: this.section.uuid,
+					products: [products[index].uuid]
+				};
+
+				return this.$store.dispatch(STORE_REMOVE_SECTION_PRODUCT_REQUEST, data);
 
 			},
-			removeProduct(){
+			async removeMeal(index, meals){
 
-			},
+				let data = {
+					uuid: this.section.uuid,
+					meals: [meals[index].uuid]
+				};
+
+				await this.$store.dispatch(STORE_REMOVE_SECTION_PRODUCT_REQUEST, data);
+				window.location.reload();
+			}
 		}
 	,
 		async asyncData({store, params}) {
