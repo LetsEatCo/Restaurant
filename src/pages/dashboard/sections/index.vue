@@ -115,7 +115,7 @@
 				});
 			},
 			viewSection(index, sections) {
-				this.$router.push(`/dashboard/meals/${sections[index].uuid}`);
+				this.$router.push(`/dashboard/sections/${sections[index].uuid}`);
 			},
 			deleteSection(index, sections){
 				return this.$store.dispatch(STORE_DELETE_SECTION_REQUEST, sections[index].uuid);
