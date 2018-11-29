@@ -90,6 +90,10 @@
 					: eventBus.$emit('addVoucherFormVisible', true);
 				this.formVisible = false;
 			},
+			sleep(seconds){
+			const waitUntil = new Date().getTime() + seconds*1000;
+			while(new Date().getTime() < waitUntil) true;
+		},
 			addVoucher() {
 				const data = {
 					code: this.form.code,
@@ -103,6 +107,7 @@
 				this.form.expirationDate = '';
 				this.form.description = '';
 				this.$store.dispatch(STORE_CREATE_VOUCHER_REQUEST, data);
+				this.sleep(1);
 				return this.closeForm();
 			}
 		}

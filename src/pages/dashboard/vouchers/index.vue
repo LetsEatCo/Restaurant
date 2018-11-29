@@ -31,18 +31,19 @@
         label="Reduction (in €)"
       />
       <el-table-column
+        property="description"
+        label="Description"
+      />
+      <el-table-column
+        property="expirationDate"
+        label="Expiration Date"
+      />
+      <el-table-column
         fixed="right"
         label="Operations"
         width="220"
       >
         <template slot-scope="scope">
-          <el-button
-            @click.native.prevent="showEditForm(scope.$index, getVouchers)"
-            class="Table__delete-button"
-            size="small"
-          >
-            Update
-          </el-button>
           <el-button
             @click.native.prevent="deleteVoucher(scope.$index, getVouchers)"
             class="Table__delete-button"
