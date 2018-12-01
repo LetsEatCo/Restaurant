@@ -48,5 +48,11 @@ export default {
 			index:'7'
 
 		},
+		{
+			name:'Vouchers',
+			url:'/vouchers',
+			index:'8'
+
+		},
 	]
 };

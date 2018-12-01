@@ -9,6 +9,7 @@ import {
 	storeProductsModule as StoreProducts,
 	storeMealsModule as StoreMeals,
 	storeSectionsModule as StoreSections,
+	storeVouchersModule as StoreVouchers,
 } from './modules/store';
 import {STORE_PROFILE_REQUEST} from './actions/store/store.actions';
 
@@ -25,6 +26,7 @@ const store = () => {
 			StoreIngredients,
 			StoreKiosks,
 			StoreSections,
+			StoreVouchers
 		},
 		actions: {
 			nuxtServerInit({commit}, {app: {$cookies, $axios}}) {
