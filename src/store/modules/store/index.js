@@ -5,3 +5,4 @@ export {storeProductsModule} from './store.products.module';
 export {storeMealsModule} from './store.meals.module';
 export {storeSectionsModule} from './store.sections.module';
 export {storeVouchersModule} from './store.vouchers.module';
+export {storeOrdersModule} from './store.orders.module';

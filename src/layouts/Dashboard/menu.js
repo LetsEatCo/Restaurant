@@ -54,5 +54,11 @@ export default {
 			index:'8'
 
 		},
+		{
+			name:'Orders',
+			url:'/orders',
+			index:'9'
+
+		}
 	]
 };
