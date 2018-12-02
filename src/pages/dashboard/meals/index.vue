@@ -11,6 +11,7 @@
       >Add</el-button>
       <AddMealForm />
       <EditMealForm />
+      <AddMealPicture />
     </div>
     <el-table
       class="Table"
@@ -42,9 +43,16 @@
       <el-table-column
         fixed="right"
         label="Operations"
-        width="250"
+        width="400"
       >
         <template slot-scope="scope">
+          <el-button
+            @click.native.prevent="showAddPictureForm(scope.$index, getMeals)"
+            class="Table__view-button"
+            size="small"
+          >
+            Add Picture
+          </el-button>
           <el-button
             @click.native.prevent="viewMeal(scope.$index, getMeals)"
             class="Table__view-button"
@@ -82,6 +90,7 @@
 	} from '../../../store/actions/store/store.meals.actions';
 	import AddMealForm from '../../../components/Dashboard/Meal/AddMealForm';
 	import EditMealForm from '../../../components/Dashboard/Meal/EditMealForm';
+	import AddMealPicture from '../../../components/Dashboard/Meal/AddMealPicture';
 	import {
 		STORE_GET_PRODUCTS_REQUEST,
 		STORE_GET_PRODUCTS_REQUEST_SUCCESS
@@ -89,7 +98,7 @@
 
 	export default {
 		layout: 'Dashboard/DashboardLayout',
-		components: {AddMealForm, EditMealForm },
+		components: {AddMealForm, EditMealForm , AddMealPicture },
 		data() {
 			return {editFormVisible: this.showEditForm() || false};
 		},
@@ -128,6 +137,23 @@
 					: eventBus.$emit('editMealFormVisible', {data: data || null, visible: true});
 
 				eventBus.$on('editMealFormVisible', payload => {
+					this.editFormVisible = !payload.visible;
+				});
+			},
+			showAddPictureForm(index, meals){
+
+				let data = {};
+				if (meals) {
+
+					data = {
+						uuid: meals[index].uuid,
+					};
+				}
+				this.editFormVisible
+					? eventBus.$emit('AddMealPictureFormVisible', { data: data || null,visible: false})
+					: eventBus.$emit('AddMealPictureFormVisible', { data: data || null,visible: true});
+
+				eventBus.$on('AddProductPictureFormVisible', payload => {
 					this.editFormVisible = !payload.visible;
 				});
 			}

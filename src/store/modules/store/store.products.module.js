@@ -3,11 +3,14 @@ import {
 	STORE_CREATE_PRODUCT_REQUEST,
 	STORE_CREATE_PRODUCT_REQUEST_ERROR,
 	STORE_CREATE_PRODUCT_REQUEST_SUCCESS,
-	STORE_DELETE_PRODUCT_REQUEST,
+	STORE_ADD_PRODUCT_PICTURE_REQUEST,
+	STORE_ADD_PRODUCT_PICTURE_REQUEST_SUCCESS,
+	STORE_ADD_PRODUCT_PICTURE_REQUEST_ERROR,
 	STORE_DELETE_PRODUCT_REQUEST_SUCCESS,
 	STORE_GET_PRODUCTS_REQUEST,
-	STORE_DELETE_PRODUCT_REQUEST_ERROR,
 	STORE_GET_PRODUCTS_REQUEST_ERROR,
+	STORE_DELETE_PRODUCT_REQUEST_ERROR,
+	STORE_DELETE_PRODUCT_REQUEST,
 	STORE_GET_PRODUCTS_REQUEST_SUCCESS,
 	STORE_UPDATE_PRODUCT_REQUEST,
 	STORE_UPDATE_PRODUCT_REQUEST_SUCCESS,
@@ -37,6 +40,24 @@ const actions = {
 				})
 				.catch(err => {
 					commit(STORE_CREATE_PRODUCT_REQUEST_ERROR);
+					reject(err);
+				});
+		});
+	},
+	[STORE_ADD_PRODUCT_PICTURE_REQUEST]: function ({commit, dispatch},data) {
+		commit(STORE_ADD_PRODUCT_PICTURE_REQUEST);
+		const {uuid, file} = data;
+
+		return new Promise((resolve, reject) => {
+			this.$axios.setToken(this.app.store.getters.getToken, 'Bearer');
+			this.$axios.$post(`/stores/me/products/${uuid}/picture`, file)
+				.then(res => {
+					commit(STORE_ADD_PRODUCT_PICTURE_REQUEST_SUCCESS);
+					dispatch(STORE_GET_PRODUCTS_REQUEST);
+					resolve(res);
+				})
+				.catch(err => {
+					commit(STORE_ADD_PRODUCT_PICTURE_REQUEST_ERROR);
 					reject(err);
 				});
 		});
@@ -103,6 +124,15 @@ const mutations = {
 		state.status = 'success';
 	},
 	[STORE_CREATE_PRODUCT_REQUEST_ERROR]: state => {
+		state.status = 'error';
+	},
+	[STORE_ADD_PRODUCT_PICTURE_REQUEST]: (state) => {
+		state.status = 'loading';
+	},
+	[STORE_ADD_PRODUCT_PICTURE_REQUEST_SUCCESS]: (state) => {
+		state.status = 'success';
+	},
+	[STORE_ADD_PRODUCT_PICTURE_REQUEST_ERROR]: state => {
 		state.status = 'error';
 	},
 	[STORE_GET_PRODUCTS_REQUEST]: (state) => {

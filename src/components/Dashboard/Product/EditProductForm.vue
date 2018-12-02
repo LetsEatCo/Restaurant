@@ -167,7 +167,6 @@
 					this.form.name = payload.data.name;
 					this.form.price = payload.data.price;
 					this.form.description = payload.data.description;
-					// this.form.ingredients = payload.data.ingredients;
 					this.formVisible = payload.visible;
 				});
 			},

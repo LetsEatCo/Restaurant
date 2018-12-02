@@ -11,6 +11,7 @@
       >Add</el-button>
       <AddProductForm />
       <EditProductForm />
+      <AddProductPicture />
     </div>
     <el-table
       class="Table"
@@ -46,10 +47,17 @@
       <el-table-column
         fixed="right"
         label="Operations"
-        width="220"
+        width="300"
       >
 
         <template slot-scope="scope">
+          <el-button
+            @click.native.prevent="showAddPictureForm(scope.$index, getProducts)"
+            class="Table__delete-button"
+            size="small"
+          >
+            Add Picture
+          </el-button>
           <el-button
             @click.native.prevent="showEditForm(scope.$index, getProducts)"
             class="Table__delete-button"
@@ -85,9 +93,10 @@
 	} from '../../../store/actions/store/store.ingredients.actions';
 	import AddProductForm from '../../../components/Dashboard/Product/AddProductForm';
 	import EditProductForm from '../../../components/Dashboard/Product/EditProductForm';
+	import AddProductPicture from '../../../components/Dashboard/Product/AddProductPicture';
 
 	export default {
-		components: {EditProductForm, AddProductForm  },
+		components: {EditProductForm, AddProductForm, AddProductPicture },
 		layout: 'Dashboard/DashboardLayout',
 		data() {
 			return {
@@ -114,6 +123,23 @@
 					this.addFormVisible = !payload;
 				});
 			},
+			showAddPictureForm(index, products){
+
+				let data = {};
+				if (products) {
+
+					data = {
+						uuid: products[index].uuid,
+					};
+				}
+				this.editFormVisible
+					? eventBus.$emit('AddProductPictureFormVisible', { data: data || null,visible: false})
+					: eventBus.$emit('AddProductPictureFormVisible', { data: data || null,visible: true});
+
+				eventBus.$on('AddProductPictureFormVisible', payload => {
+					this.editFormVisible = !payload.visible;
+				});
+			},
 			showEditForm(index, products) {
 				let data = {};
 				if (products) {
@@ -124,7 +150,6 @@
 						name: products[index].name,
 						price: products[index].price,
 						description: products[index].description,
-						// ingredients: products[index].ingredients
 					};
 				}
 				this.editFormVisible
