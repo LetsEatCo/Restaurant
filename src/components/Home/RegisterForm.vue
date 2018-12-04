@@ -33,7 +33,7 @@
       >
         <el-select
           placeholder="Cuisines"
-					multiple
+          multiple
           v-model="form.cuisineUuids"
         >
           <el-option
