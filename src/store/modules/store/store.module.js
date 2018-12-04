@@ -16,7 +16,7 @@ const state = {
 	profile: {}};
 
 const getters = {
-	isAuthenticated: state => !!Cookies.get('JWT'),
+	isAuthenticated: () => !!Cookies.get('JWT'),
 	getProfile: state => state.profile,
 	getToken: state => state.jwt,
 	isProfileLoaded: state => !!state.profile.name

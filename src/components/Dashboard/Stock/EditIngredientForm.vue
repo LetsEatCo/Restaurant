@@ -43,7 +43,6 @@
 
 <script>
 	import {
-		STORE_CREATE_INGREDIENT_REQUEST,
 		STORE_UPDATE_INGREDIENT_REQUEST
 	} from '../../../store/actions/store/store.ingredients.actions';
 	import eventBus from '../../../utils/event-bus';
