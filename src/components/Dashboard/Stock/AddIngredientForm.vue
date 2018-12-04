@@ -1,39 +1,39 @@
 <template>
-  <el-dialog 
-    title="Add Ingredient" 
-    custom-class="Actions__add-dialog" 
-    :visible.sync="formVisible" 
+  <el-dialog
+    title="Add Ingredient"
+    custom-class="Actions__add-dialog"
+    :visible.sync="formVisible"
     top="30vh"
-    width="35%" 
+    width="35%"
     @close="closeForm()"
   >
-    <el-form 
-      ref="form" 
+    <el-form
+      ref="form"
       :model="form"
     >
       <el-form-item label="Ingredient Name">
-        <el-input 
-          placeholder="Eg. Salad" 
-          v-model="form.name" 
+        <el-input
+          placeholder="Eg. Salad"
+          v-model="form.name"
           autocomplete="off"
         />
       </el-form-item>
       <el-form-item label="Quantity">
-        <el-input 
-          placeholder="Ingredient quantity available in your stock" 
+        <el-input
+          placeholder="Ingredient quantity available in your stock"
           v-model="form.quantity"
           autocomplete="off"
         />
       </el-form-item>
     </el-form>
     <div slot="footer">
-      <el-button 
+      <el-button
         class="cancel-button"
         @click="formVisible = false"
       >Cancel
       </el-button>
-      <el-button 
-        class="add-button" 
+      <el-button
+        class="add-button"
         @click="addIngredient"
       >Add Ingredient</el-button>
     </div>
@@ -75,6 +75,7 @@
 					name: this.form.name,
 					quantity: parseInt(this.form.quantity)
 				};
+				this.closeForm();
 				return this.$store.dispatch(STORE_CREATE_INGREDIENT_REQUEST, data);
 			}
 		}

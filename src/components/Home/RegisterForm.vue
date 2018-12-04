@@ -1,90 +1,107 @@
 <template>
   <div>
     <h1>Become a partner</h1>
-    <el-form 
-      ref="form" 
-      :model="form" 
+    <el-form
+      ref="form"
+      :model="form"
       :rules="rules"
     >
-      <el-form-item 
-        class="name-field" 
+      <el-form-item
+        class="name-field"
         prop="name"
       >
-        <el-input 
-          placeholder="Name" 
-          v-model="form.name" 
+        <el-input
+          placeholder="Name"
+          v-model="form.name"
           autocomplete="on"
         />
       </el-form-item>
-      <el-form-item 
-        class="email-field" 
+      <el-form-item
+        class="email-field"
         prop="email"
       >
-        <el-input 
-          placeholder="Email" 
-          type="email" 
-          v-model="form.email" 
+        <el-input
+          placeholder="Email"
+          type="email"
+          v-model="form.email"
           autocomplete="on"
         />
       </el-form-item>
-      <el-form-item 
-        class="phone-field" 
+      <el-form-item
+        class="cuisines-field"
+        prop="cuisines"
+      >
+        <el-select
+          placeholder="Cuisines"
+					multiple
+          v-model="form.cuisineUuids"
+        >
+          <el-option
+            v-for="item in this.cuisines"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+      </el-form-item>
+      <el-form-item
+        class="phone-field"
         prop="phoneNumber"
       >
-        <el-input 
-          placeholder="Phone Number" 
-          v-model="form.phoneNumber" 
+        <el-input
+          placeholder="Phone Number"
+          v-model="form.phoneNumber"
           autocomplete="on"
         />
       </el-form-item>
-      <el-form-item 
-        class="password-field" 
+      <el-form-item
+        class="password-field"
         prop="password"
       >
-        <el-input 
-          placeholder="Password" 
-          type="password" 
-          v-model="form.password" 
+        <el-input
+          placeholder="Password"
+          type="password"
+          v-model="form.password"
           autocomplete="off"
         />
       </el-form-item>
-      <el-form-item 
-        class="street-field" 
+      <el-form-item
+        class="street-field"
         prop="street"
       >
-        <el-input 
-          placeholder="Street" 
-          v-model="form.street" 
+        <el-input
+          placeholder="Street"
+          v-model="form.street"
           autocomplete="on"
         />
       </el-form-item>
-      <el-form-item 
-        class="city-field" 
+      <el-form-item
+        class="city-field"
         prop="city"
       >
-        <el-input 
-          placeholder="City" 
-          v-model="form.city" 
+        <el-input
+          placeholder="City"
+          v-model="form.city"
           autocomplete="on"
         />
       </el-form-item>
-      <el-form-item 
-        class="zip-code-field" 
+      <el-form-item
+        class="zip-code-field"
         prop="zipCode"
       >
-        <el-input 
-          placeholder="Zip code" 
-          v-model="form.zipCode" 
+        <el-input
+          placeholder="Zip code"
+          v-model="form.zipCode"
           autocomplete="on"
         />
       </el-form-item>
-      <el-form-item 
-        class="country-field" 
+      <el-form-item
+        class="country-field"
         prop="country"
       >
-        <el-input 
-          placeholder="Country" 
-          v-model="form.country" 
+        <el-input
+          placeholder="Country"
+          v-model="form.country"
           autocomplete="off"
         />
       </el-form-item>
@@ -98,6 +115,12 @@
 
 	export default {
 		name: 'RegisterForm',
+		props: {
+			cuisines: {
+				type: Array,
+				required: true
+			}
+		},
 		data() {
 			return {
 				form: {
@@ -108,7 +131,8 @@
 					street: '',
 					city: '',
 					zipCode: '',
-					country: ''
+					country: '',
+					cuisineUuids: []
 				},
 				rules: {
 					name: [
@@ -154,7 +178,8 @@
 								city: this.form.city,
 								zipCode: this.form.zipCode,
 								country: this.form.country
-							}
+							},
+							cuisineUuids: this.form.cuisineUuids
 						};
 						return this.$store.dispatch(REGISTER_REQUEST, data);
 					} else {
@@ -179,6 +204,13 @@
 		}
 	}
 
+	.el-select /deep/ .el-input__inner {
+		border-radius: 0;
+		&:focus {
+			border-color: black;
+		}
+	}
+
 	.el-button {
 		margin-top: 10px;
 		width: 100%;
@@ -189,5 +221,8 @@
 		border: none;
 		border-radius: 0;
 		padding: 16px 20px;
+	}
+	.el-select {
+		width: 100%;
 	}
 </style>

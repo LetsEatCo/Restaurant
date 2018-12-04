@@ -1,80 +1,80 @@
 <template>
-  <el-dialog 
-    title="Add Product" 
-    custom-class="Actions__add-dialog" 
-    :visible.sync="formVisible" 
+  <el-dialog
+    title="Add Product"
+    custom-class="Actions__add-dialog"
+    :visible.sync="formVisible"
     top="10vh"
-    width="35%" 
+    width="35%"
     @close="closeForm()"
   >
-    <el-form 
-      label-position="top" 
-      ref="form" 
-      :model="form" 
+    <el-form
+      label-position="top"
+      ref="form"
+      :model="form"
       :rules="rules"
     >
-      <el-form-item 
-        label="Reference" 
+      <el-form-item
+        label="Reference"
         prop="reference"
       >
-        <el-input 
-          placeholder="Product Reference" 
+        <el-input
+          placeholder="Product Reference"
           v-model="form.reference"
           autocomplete="off"
         />
       </el-form-item>
-      <el-form-item 
-        label="EAN13" 
+      <el-form-item
+        label="EAN13"
         prop="ean13"
       >
-        <el-input 
-          placeholder="EAN13 code" 
+        <el-input
+          placeholder="EAN13 code"
           v-model="form.ean13"
           autocomplete="off"
         />
       </el-form-item>
-      <el-form-item 
-        label="Product Name" 
+      <el-form-item
+        label="Product Name"
         prop="name"
       >
-        <el-input 
-          placeholder="Eg. Burger, Sushi, Tacos" 
-          v-model="form.name" 
+        <el-input
+          placeholder="Eg. Burger, Sushi, Tacos"
+          v-model="form.name"
           autocomplete="off"
         />
       </el-form-item>
-      <el-form-item 
-        label="Price" 
+      <el-form-item
+        label="Price"
         prop="price"
       >
-        <el-input-number 
-          :precision="2" 
-          :step="0.01" 
-          :min="0" 
-          placeholder="In €" 
-          v-model="form.price" 
+        <el-input-number
+          :precision="2"
+          :step="0.01"
+          :min="0"
+          placeholder="In €"
+          v-model="form.price"
           autocomplete="off"
         />
       </el-form-item>
       <el-form-item label="Description">
-        <el-input 
-          type="textarea" 
-          v-model="form.description" 
+        <el-input
+          type="textarea"
+          v-model="form.description"
           autocomplete="off"
         />
       </el-form-item>
       <el-form-item label="Ingredients">
-        <el-cascader 
-          multiple 
+        <el-cascader
+          multiple
           placeholder="Ingredients"
-          :options="options()" 
+          :options="options()"
           @change="addProductIngredient"
         />
       </el-form-item>
       <el-form-item>
-        <el-tag 
-          :key="ingredient.ingredientUuid" 
-          v-for="ingredient in form.ingredients" 
+        <el-tag
+          :key="ingredient.ingredientUuid"
+          v-for="ingredient in form.ingredients"
           closable
           @close="handleTagClose(ingredient)"
         >
@@ -83,13 +83,13 @@
       </el-form-item>
     </el-form>
     <div slot="footer">
-      <el-button 
+      <el-button
         class="cancel-button"
         @click="formVisible = false"
       >Cancel
       </el-button>
-      <el-button 
-        class="add-button" 
+      <el-button
+        class="add-button"
         @click="addProduct('form')"
       >Add Product</el-button>
     </div>
@@ -179,6 +179,7 @@
 							description: this.form.description,
 							ingredients: this.form.ingredients
 						};
+						this.closeForm();
 						return this.$store.dispatch(STORE_CREATE_PRODUCT_REQUEST, data);
 					} else {
 						return false;

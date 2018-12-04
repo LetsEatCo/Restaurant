@@ -1,16 +1,16 @@
 <template>
   <div class="Home">
     <div class="Hero__Content">
-      <h1 
-        class="Hero__Content__title" 
+      <h1
+        class="Hero__Content__title"
         :class="$mq"
       >The fast way to <br>
         get food to your customers</h1>
-      <div 
-        class="Hero__Content__form" 
+      <div
+        class="Hero__Content__form"
         :class="$mq"
       >
-        <RegisterForm />
+        <RegisterForm :cuisines="this.cuisines" />
       </div>
     </div>
     <div class="Hero__Image" />
@@ -22,6 +22,16 @@
 
 	export default {
 		layout: 'HomepageLayout',
+	async asyncData({app}) {
+		const cuisines = [];
+		return app.$axios.$get('/cuisines')
+			.then(res => {
+				res.data.forEach(cuisine => {
+					cuisines.push({value: cuisine.uuid, label: cuisine.name})
+				});
+				return {cuisines};
+			});
+	},
 		components: {RegisterForm}
 	};
 </script>

@@ -175,6 +175,7 @@
 							products: products,
 							meals: meals
 						};
+						this.closeForm();
 						return this.$store.dispatch(STORE_CREATE_SECTION_REQUEST, data);
 					} else {
 						return false;

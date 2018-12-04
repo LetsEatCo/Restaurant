@@ -163,6 +163,7 @@
 								products: products,
 								meals: meals
 							};
+							this.closeForm();
 							return this.$store.dispatch(STORE_ADD_SECTION_PRODUCT_REQUEST, data);
 						} else {
 							return false;

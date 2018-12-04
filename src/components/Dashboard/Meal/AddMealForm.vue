@@ -344,7 +344,7 @@
 				this.form.subsections.push({
 					name: '',
 					isRequired: false,
-					minSelectionsPermitted: '',
+					minSelectionsPermitted: '' || 1,
 					maxSelectionsPermitted: '',
 					options: {
 						products: [],
@@ -394,6 +394,7 @@
 							productUuid: this.form.productUuid,
 							subsections: this.form.subsections
 						};
+						this.closeForm();
 						return this.$store.dispatch(STORE_CREATE_MEAL_REQUEST, data);
 					} else {
 						return false;

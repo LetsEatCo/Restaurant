@@ -8,7 +8,7 @@ import {
 	STORE_ADD_PROFILE_PICTURE_REQUEST_ERROR,
 	STORE_EDIT_PROFILE_REQUEST, STORE_EDIT_PROFILE_REQUEST_SUCCESS, STORE_EDIT_PROFILE_REQUEST_ERROR
 } from '../../actions/store/store.actions';
-
+import * as Cookies from 'js-cookie'
 
 const state = {
 	status: '',
@@ -16,7 +16,7 @@ const state = {
 	profile: {}};
 
 const getters = {
-	isAuthenticated: state => !!state.jwt,
+	isAuthenticated: state => !!Cookies.get('JWT'),
 	getProfile: state => state.profile,
 	getToken: state => state.jwt,
 	isProfileLoaded: state => !!state.profile.name

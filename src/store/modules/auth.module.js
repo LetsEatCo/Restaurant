@@ -30,6 +30,7 @@ const actions = {
 	[AUTH_LOGOUT]: ({commit}) => {
 		return new Promise(resolve => {
 			commit(AUTH_LOGOUT);
+			Cookies.remove('JWT');
 			Cookies.remove('rootpersist');
 			resolve();
 		});
